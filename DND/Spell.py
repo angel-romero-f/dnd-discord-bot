@@ -1,7 +1,7 @@
-from DND.Character import Character
+from DND import Stats
+import random
 
-
-class Spell:
+class Spell(Stats):
     """
     This class should contain a few spells and their functions like cast and heal
     This is where spell information should go
@@ -24,9 +24,8 @@ class Spell:
         Method to make the spell have an affect
         '''
         if spell.lower() == "fire bolt":
-            pass
+            amount = random.randint(1, 10)
+            target.hp_change(-amount)
         if spell.lower() == "cure wounds":
-            pass
-        if spell.lower() == "create water" or spell.lower() == "destroy water" or spell.lower() == "create or destroy water":
-            pass
-        
+            amount = random.randint(1, 8)
+            target.hp_change(amount)
