@@ -45,7 +45,7 @@ class Stats(Character, Class):
     def statroll(self, class_obj):
         """
         Rolls four 6 sided die, drops the smallest die and takes the sum of the other three
-        Inputs: None
+        Inputs: class_obj = class object 
         Outputs: A sequence of 6 integers each <= 18. The corresponding stat is next to the integer in the following order:
         Strength : int
         Dexterity : int
@@ -57,7 +57,6 @@ class Stats(Character, Class):
         stats = [self.strength, self.constitution, self.dexterity, self.wisdom, self.intelligence, self.charisma, self.hit_points]
         #rolls 4 die and discards the lowest dice. Sums the remaining die and tethers it to the corresponding stat
         for statroll in range(6):
-            stat = 0
             rolls = [random.randint(1, 6) for _ in range(4)]
             discard_roll = min(rolls)
             rolls.pop(discard_roll)
@@ -85,11 +84,11 @@ class Stats(Character, Class):
         #adds constitution modifier to base hp depending on class input by user
         else:
             const_mod = 0
-        if class_obj.get_name == "wizard":
+        if (class_obj.get_name.lower() == "wizard"):
             stats[-1] = 4 + const_mod
-        elif class_obj.get_name == "barbarian":
+        elif (class_obj.get_name.lower() == "barbarian"):
             stats[-1] = 12 + const_mod
-        elif class_obj.get_name == "bard":
+        elif (class_obj.get_name.lower() == "bard"):
             stats[-1] = 8 + const_mod
         return f"Strength: {stats[0]}\nDexterity: {stats[1]}\nConstitution: {stats[2]}\nIntelligence: {stats[3]}\nWisdom: {stats[4]}\nCharisma: {stats[5]}\nHP: {stats[-1]}"
 
