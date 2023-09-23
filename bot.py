@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import asyncio
+import random
 import cogs.misc
 
 intents = discord.Intents.all()
@@ -13,7 +14,16 @@ async def on_ready():
 
 async def main():
 	await bot.start('MTE1NDk5NjUyNzA3MzM0NTU4Nw.Ga9JEb.2v5fCD73nONnyg7SPXfZ9ImxkE2Yv2rRggGxGI')
-	
+
+@bot.command()
+async def roll(ctx: commands.Context):
+    """
+    Rolls a n-sided dice.
+    Inputs:
+    n = integer representing the number of sides of the die.
+    """
+    await ctx.send(f"You rolled {random.randrange(1,6)}")
+
 asyncio.run(main())
 
 
