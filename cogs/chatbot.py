@@ -1,9 +1,11 @@
 import openai
+import discord
 from discord.ext import commands
 import asyncio
 
 
-bot = commands.Bot(command_prefix='!')
+intents = discord.Intents.all()
+bot = commands.Bot(command_prefix = commands.when_mentioned_or('!'), intents = intents)
 
 @bot.event
 async def on_ready():
@@ -45,4 +47,4 @@ async def talk_to_character(ctx, character: str):
     # Send the response back to the user
     await ctx.send(f"{character.capitalize()}: {response}")
 
-bot.run('YOUR_BOT_TOKEN')
+bot.run('MTE1NDk5NjUyNzA3MzM0NTU4Nw.Ga9JEb.2v5fCD73nONnyg7SPXfZ9ImxkE2Yv2rRggGxGI')
