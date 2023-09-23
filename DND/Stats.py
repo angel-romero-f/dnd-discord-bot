@@ -1,10 +1,11 @@
 from Character import Character
 from Classes.Class import Class
+import Classes.Class
 import random 
 import discord 
 from discord.ext import commands
 import asyncio
-from Classes.Bard import Bard
+
 
 
 
@@ -59,7 +60,7 @@ class Stats(Character, Class):
         #rolls 4 die and discards the lowest dice. Sums the remaining die and tethers it to the corresponding stat
         for statroll in range(6):
             rolls = [random.randint(1, 6) for _ in range(4)]
-            discard_roll = min(rolls)
+            discard_roll = rolls.index(min(rolls))
             rolls.pop(discard_roll)
             sum_rolls = sum(rolls)
             stats[statroll] = sum_rolls
@@ -86,12 +87,11 @@ class Stats(Character, Class):
         #adds constitution modifier to base hp depending on class input by user
         else:
             const_mod = 0
-        if (class_obj.get_name.lower() == "wizard"):
+        if (class_obj.get_name().lower() == "wizard"):
             stats[-1] = 4 + const_mod
-        elif (class_obj.get_name.lower() == "barbarian"):
+        elif (class_obj.get_name().lower() == "barbarian"):
             stats[-1] = 12 + const_mod
-        elif (class_obj.get_name.lower() == "bard"):
+        elif (class_obj.get_name().lower() == "bard"):
             stats[-1] = 8 + const_mod
         return f"Strength: {stats[0]}\nDexterity: {stats[1]}\nConstitution: {stats[2]}\nIntelligence: {stats[3]}\nWisdom: {stats[4]}\nCharisma: {stats[5]}\nHP: {stats[-1]}"
 
-bard = Bard()
