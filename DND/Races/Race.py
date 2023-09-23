@@ -7,8 +7,9 @@ class Race:
     base_speed = 0
     base_ac = 0
     resistances = []
-    traits = []
     height = 0
+    dark_vision = False
+
     def __init__(self, race_name):
         self.race = race_name
 
@@ -28,8 +29,8 @@ class Race:
         returns the resistances associated with this race
         """
         return self.resistances
-    def get_traits(self):
+    def get_dark_vision(self):
         """
-        returns the traits associated with this race
+        returns whether or not this race has dark_vision
         """
-        return self.traits
+        return self.get_dark_vision

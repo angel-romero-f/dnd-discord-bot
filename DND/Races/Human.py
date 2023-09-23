@@ -6,4 +6,6 @@ class human(Race):
         # in inches
         super().__init__("Human")
         self.height = 68
+        self.base_ac = 8
+
 
