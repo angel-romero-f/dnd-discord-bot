@@ -1,4 +1,3 @@
-from DND import Character
 class Class:
     """
     Inputs: 
