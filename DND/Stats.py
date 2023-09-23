@@ -59,5 +59,5 @@ class Stats(Character):
             rolls.pop(discard_roll)
             sum_rolls = sum(rolls)
             stats[statroll] = sum_rolls
-        return str(f"Strength: {stats[0]}\nDexterity: {stats[1]}\nConstitution: {stats[2]}\nIntelligence: {stats[3]}\nWisdom: {stats[4]}\nCharisma: {stats[5]}")
+        return f"Strength: {stats[0]}\nDexterity: {stats[1]}\nConstitution: {stats[2]}\nIntelligence: {stats[3]}\nWisdom: {stats[4]}\nCharisma: {stats[5]}"
 
