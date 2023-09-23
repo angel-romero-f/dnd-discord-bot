@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import asyncio
 
+from DND.Stats import Stats
 
 class Player(commands.Cog):
     character_ids = {}
@@ -18,7 +19,13 @@ class Player(commands.Cog):
     async def char_name(self, ctx: commands.Context):
         await ctx.send(self.character_ids[ctx.author])
 
-    
+
+    @commands.command(name = "stat_roll")
+    async def stat_roll(self, ctx:commands.Context):
+        stats = Stats()
+        stat_rolls = stats.statroll()
+        await ctx.send(f'Your stats are: \n {stat_rolls}')
+        
 
 async def setup(client):
     await client.add_cog(Player(client))

@@ -1,4 +1,4 @@
-from DND import Character
+from Character import Character
 import random 
 import discord
 from discord.ext import commands
