@@ -1,15 +1,20 @@
 from DND import Character
+import random 
+import discord
+from discord.ext import commands
+import asyncio
+
 class Stats(Character):
     """
     Should initalize with the information of level, race, and class that way it knows what to make each stat and how to modify it
     Making use of methods like roll may be useful to create methods in here, should probably br able to display
     """
-    def __init__(self, hit_points, strength, cons, dext, wis, intelligence, charisma, char_lvl):
-        self.health_points = hit_points
+    def __init__(self, hit_points, strength, constitution, dexterity, wisdom, intelligence, charisma, char_lvl):
+        self.hit_points = hit_points
         self.strength = strength 
-        self.cons = cons
-        self.dext = dext
-        self.wis = wis
+        self.constitution = constitution
+        self.dexterity = dexterity
+        self.wisdom = wisdom
         self.intelligence = intelligence
         self.charisma = charisma
         self.char_lvl = char_lvl
@@ -31,4 +36,28 @@ class Stats(Character):
         """
         How the hp of the characters evolves throughout the game. Independent of the total hitpoints. 
         """
-        current_hp = current_hp + amount          
+        current_hp = current_hp + amount
+
+
+    def statroll(self):
+        """
+        Rolls four 6 sided die, drops the smallest die and takes the sum of the other three
+        Inputs: None
+        Outputs: A sequence of 6 integers each <= 18. The corresponding stat is next to the integer in the following order:
+        Strength : int
+        Dexterity : int
+        Constitution : int 
+        Intelligence : int 
+        Wisdom : int 
+        Charisma : int 
+        """
+        stats = [self.strength, self.constitution, self.dexterity, self.wisdom, self.intelligence, self.charisma]
+        for statroll in range(7):
+            stat = 0
+            rolls = [random.randint(1, 6) for _ in range(5)]
+            discard_roll = min(rolls)
+            rolls.pop(discard_roll)
+            for roll in rolls:
+                stat = stat + roll
+                stats[statroll] = stat
+        return "Strength: " + str(stats[0]) + ", Dexterity: " + str(stats[1]) + ", Constitution: " + str(stats[2]) + ", Intelligence: " + str(stats[3]) + ", Wisdom: " + str(stats[4]) + ", Charisma: " + str(stats[5])

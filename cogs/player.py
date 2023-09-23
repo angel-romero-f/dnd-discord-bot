@@ -17,5 +17,7 @@ class Player(commands.Cog):
     async def char_name(self, ctx: commands.Context):
         await ctx.send(self.character_ids[ctx.author])
 
+    
+
 async def setup(client):
     await client.add_cog(Player(client))
