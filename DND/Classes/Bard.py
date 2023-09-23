@@ -7,5 +7,7 @@ class Bard(Class):
     this is where attributes of this class should be held
     """
     def __init__(self):
-        super().__init__(["Musical", "Armor"], "bard")
+        super().__init__(["Musical", "Armor"], "Bard")
+        self.speciality = 'Inspiration'
+
     
