@@ -1,4 +1,4 @@
-from cogs import Class
+from DND import Class
 class Bard(Class):
     """
     Constructor for the bard class, should definitely override some methods

@@ -1,5 +1,4 @@
 from cogs import Character
-
 class Stats(Character):
     """
     Should initalize with the information of level, race, and class that way it knows what to make each stat and how to modify it
