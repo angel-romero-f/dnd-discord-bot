@@ -52,13 +52,12 @@ class Stats(Character):
         Charisma : int 
         """
         stats = [self.strength, self.constitution, self.dexterity, self.wisdom, self.intelligence, self.charisma]
-        for statroll in range(7):
+        for statroll in range(6):
             stat = 0
-            rolls = [random.randint(1, 6) for _ in range(5)]
+            rolls = [random.randint(1, 6) for _ in range(4)]
             discard_roll = min(rolls)
             rolls.pop(discard_roll)
             sum_rolls = sum(rolls)
             stats[statroll] = sum_rolls
         return f"Strength: {stats[0]}\nDexterity: {stats[1]}\nConstitution: {stats[2]}\nIntelligence: {stats[3]}\nWisdom: {stats[4]}\nCharisma: {stats[5]}"
 
-    
