@@ -35,6 +35,7 @@ class Stats(Character):
     def hp_change(self, amount):
         """
         How the hp of the characters evolves throughout the game. Independent of the total hitpoints. 
+        """
         current_hp = current_hp + amount
 
 
