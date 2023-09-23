@@ -2,6 +2,11 @@ import discord
 from discord.ext import commands
 import asyncio
 
+class class_button(discord.ui.Button):
+    message = ''
+    count = 0
+    
+
 class Player(commands.Cog):
     character_ids = {}
 
