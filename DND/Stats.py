@@ -4,6 +4,7 @@ import random
 import discord 
 from discord.ext import commands
 import asyncio
+from Classes.Bard import Bard
 
 
 
@@ -93,3 +94,4 @@ class Stats(Character, Class):
             stats[-1] = 8 + const_mod
         return f"Strength: {stats[0]}\nDexterity: {stats[1]}\nConstitution: {stats[2]}\nIntelligence: {stats[3]}\nWisdom: {stats[4]}\nCharisma: {stats[5]}\nHP: {stats[-1]}"
 
+bard = Bard()

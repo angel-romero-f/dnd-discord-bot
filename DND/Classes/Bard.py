@@ -9,3 +9,4 @@ class Bard(Class):
     def __init__(self):
         super().__init__("Bard", ["Musical", "Armor"])
     
+bard = Bard()
