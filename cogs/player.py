@@ -6,6 +6,7 @@ import sys
 sys.path.append('DND/')
 
 from Stats import Stats
+from DND.Stats import Stats
 
 class Player(commands.Cog):
     character_ids = {}
@@ -25,8 +26,9 @@ class Player(commands.Cog):
 
     @commands.command(name = "stat_roll")
     async def stat_roll(self, ctx:commands.Context):
-        stats = Stats()
-        stat_rolls = stats.statroll()
+        stat = Stats()
+        stat_rolls = stat.statroll
+        print(stat_rolls)
         await ctx.send(f'Your stats are: \n {stat_rolls}')
         
 
