@@ -3,10 +3,9 @@ from discord.ext import commands
 import asyncio
 import sys
 
-sys.path.append('dnd-discord-bot/DND/')
+sys.path.append('DND/')
 
 from Stats import Stats
-from DND.Stats import Stats
 
 class Player(commands.Cog):
     character_ids = {}
