@@ -5,5 +5,5 @@ Class for the barbarian class
 """
 class Barbarian(Class):
     def __init__(self):
-        super().__init__("Barbarian", ["Strong, Heavy Armor"])
+        super().__init__(["Strong, Heavy Armor"], "Barbarian")
         

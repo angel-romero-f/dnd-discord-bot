@@ -10,21 +10,16 @@ class ChatBot(commands.Cog):
     def __init__(self, client):
         self.client = client
     def generate_gpt3_response(self, prompt):
-        try:
-            response = openai.Completion.create(
-                model="text-davinci-003",
-                prompt=prompt,
-                temperature=1,
-                max_tokens = 100
-            )
-            response_dict = response.get('choice')
-            if response_dict:
-                prompt_resp = response_dict[0]['text']
-            return prompt_resp
-        except Exception as e:
-            # Handle any exceptions here (e.g., print an error message)
-            print(f"Error generating GPT-3 response: {e}")
-            return "An error occurred while generating the response."
+        response = openai.Completion.create(
+            model="text-davinci-003",
+            prompt=prompt,
+            temperature=1,
+            max_tokens = 100
+        )
+        response_dict = response.get('choice')
+        if response_dict:
+            prompt_resp = response_dict[0]['text']
+        return prompt_resp
 
     @commands.command(name = "talk")
     async def talk(self, ctx, message: str):
