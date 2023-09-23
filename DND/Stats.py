@@ -1,16 +1,17 @@
 from Character import Character
+from Class import Class
 import random 
 import discord
 from discord.ext import commands
 import asyncio
 
-class Stats(Character):
+class Stats(Character, Class):
     """
     Should initalize with the information of level, race, and class that way it knows what to make each stat and how to modify it
     Making use of methods like roll may be useful to create methods in here, should probably br able to display
     """
     def __init__(self, hit_points=4, strength=0, constitution=0, dexterity=0, wisdom=0, intelligence=0, charisma=0, char_lvl=1):
-        self.health_points = hit_points
+        self.hit_points = hit_points
         self.strength = strength 
         self.constitution = constitution
         self.dexterity = dexterity
@@ -51,7 +52,7 @@ class Stats(Character):
         Wisdom : int 
         Charisma : int 
         """
-        stats = [self.strength, self.constitution, self.dexterity, self.wisdom, self.intelligence, self.charisma]
+        stats = [self.strength, self.constitution, self.dexterity, self.wisdom, self.intelligence, self.charisma, self.hit_points]
         for statroll in range(6):
             stat = 0
             rolls = [random.randint(1, 6) for _ in range(4)]
@@ -59,5 +60,21 @@ class Stats(Character):
             rolls.pop(discard_roll)
             sum_rolls = sum(rolls)
             stats[statroll] = sum_rolls
-        return f"Strength: {stats[0]}\nDexterity: {stats[1]}\nConstitution: {stats[2]}\nIntelligence: {stats[3]}\nWisdom: {stats[4]}\nCharisma: {stats[5]}"
+        if stats[1] > 10:
+            if (7 < stats[1] <= 9):
+                const_mod = -1 
+            elif (5 < stats[1] <= 7):
+                const_mod = -2
+            elif (3 < stats[1] <= 5):
+                const_mod = -3 
+            else:
+                const_mod = -4 
+
+        if Class.class_name == "wizard":
+            stats[-1] = 4
+        elif Class.class_name == "barbarian":
+            stats[-1] = 12
+        elif Class.class_name == "bard":
+            stats[-1] = 8 
+        return f"Strength: {stats[0]}\nDexterity: {stats[1]}\nConstitution: {stats[2]}\nIntelligence: {stats[3]}\nWisdom: {stats[4]}\nCharisma: {stats[5]}\nHP: {stats[-1]}"
 
