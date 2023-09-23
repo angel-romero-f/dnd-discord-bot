@@ -55,6 +55,7 @@ class Stats(Character, Class):
         Charisma : int 
         """
         stats = [self.strength, self.constitution, self.dexterity, self.wisdom, self.intelligence, self.charisma, self.hit_points]
+        #rolls 4 die and discards the lowest dice. Sums the remaining die and tethers it to the corresponding stat
         for statroll in range(6):
             stat = 0
             rolls = [random.randint(1, 6) for _ in range(4)]
@@ -62,6 +63,7 @@ class Stats(Character, Class):
             rolls.pop(discard_roll)
             sum_rolls = sum(rolls)
             stats[statroll] = sum_rolls
+        #to initialize hp for given classes. determines constitution modifier based on constitution
         if stats[1] < 10:
             if (7 < stats[1] <= 9):
                 const_mod = -1 
@@ -71,7 +73,7 @@ class Stats(Character, Class):
                 const_mod = -3 
             else:
                 const_mod = -4
-        if stats[1] > 10:
+        elif stats[1] > 10:
             if (11 <= stats[1] < 13):
                 const_mod = 1
             elif (13 <= stats[1] < 15):
@@ -80,6 +82,7 @@ class Stats(Character, Class):
                 const_mod = 3
             else:
                 const_mod = 4
+        #adds constitution modifier to base hp depending on class input by user
         else:
             const_mod = 0
         if class_obj.get_name == "wizard":
