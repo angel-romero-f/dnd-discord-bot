@@ -1,9 +1,11 @@
 from Character import Character
 from Classes.Class import Class
 import random 
-import discord
+import discord 
 from discord.ext import commands
 import asyncio
+
+
 
 class Stats(Character, Class):
     """
@@ -40,7 +42,7 @@ class Stats(Character, Class):
         current_hp = current_hp + amount
 
 
-    def statroll(self):
+    def statroll(self, class_obj):
         """
         Rolls four 6 sided die, drops the smallest die and takes the sum of the other three
         Inputs: None
@@ -60,7 +62,7 @@ class Stats(Character, Class):
             rolls.pop(discard_roll)
             sum_rolls = sum(rolls)
             stats[statroll] = sum_rolls
-        if stats[1] > 10:
+        if stats[1] < 10:
             if (7 < stats[1] <= 9):
                 const_mod = -1 
             elif (5 < stats[1] <= 7):
@@ -68,13 +70,23 @@ class Stats(Character, Class):
             elif (3 < stats[1] <= 5):
                 const_mod = -3 
             else:
-                const_mod = -4 
-
-        if Class.class_name == "wizard":
-            stats[-1] = 4
-        elif Class.class_name == "barbarian":
-            stats[-1] = 12
-        elif Class.class_name == "bard":
-            stats[-1] = 8 
+                const_mod = -4
+        if stats[1] > 10:
+            if (11 <= stats[1] < 13):
+                const_mod = 1
+            elif (13 <= stats[1] < 15):
+                const_mod = 2
+            elif (15 <= stats[1] < 17):
+                const_mod = 3
+            else:
+                const_mod = 4
+        else:
+            const_mod = 0
+        if class_obj.get_name == "wizard":
+            stats[-1] = 4 + const_mod
+        elif class_obj.get_name == "barbarian":
+            stats[-1] = 12 + const_mod
+        elif class_obj.get_name == "bard":
+            stats[-1] = 8 + const_mod
         return f"Strength: {stats[0]}\nDexterity: {stats[1]}\nConstitution: {stats[2]}\nIntelligence: {stats[3]}\nWisdom: {stats[4]}\nCharisma: {stats[5]}\nHP: {stats[-1]}"
 
