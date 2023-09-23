@@ -28,7 +28,7 @@ class Player(commands.Cog):
     async def stat_roll(self, ctx:commands.Context):
         stat = Stats()
         stat_rolls = stat.statroll()
-        await ctx.send(f'Your stats are: \n {stat_rolls}')
+        await ctx.send(f'Your stats are: \n{stat_rolls}')
         
 
 async def setup(client):
