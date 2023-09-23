@@ -1,4 +1,4 @@
-from DND import Stats
+from Stats import Stats
 import random
 
 class Spell(Stats):
@@ -25,7 +25,10 @@ class Spell(Stats):
         '''
         if spell.lower() == "fire bolt":
             amount = random.randint(1, 11)
-            target.hp_change(-amount)
+            target.hp_change(amount)
+
         if spell.lower() == "cure wounds":
             amount = random.randint(1, 9)
             target.hp_change(amount)
+            pass
+        
