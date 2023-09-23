@@ -15,12 +15,5 @@ async def main():
 	await bot.start('MTE1NDk3MDY0NTQxMTY3MjA3NA.G_Jvl3.f9i2WY3XIrPRDvqyX2oHn0xdjQh5TgbuzhyuKg')
 asyncio.run(main())
 
-async def roll(n):
-    """
-    Rolls a n-sided dice.
-    Inputs:
-    n = integer representing the number of sides of the die.
-    """
-    return str(random.randint(1,n))
 
 
