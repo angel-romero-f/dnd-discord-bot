@@ -6,7 +6,8 @@ import sys
 sys.path.append('DND/')
 
 from Stats import Stats
-import Classes.Class as Class
+from Classes.Bard import Bard
+
 
 class Player(commands.Cog):
     character_ids = {}
@@ -18,16 +19,20 @@ class Player(commands.Cog):
     async def new_char(self, ctx: commands.Context, name: str, class_name: str):
         self.character_ids[ctx.author] = name
         await ctx.send(f'hello {name}!' )
-        
         class_obj = None
         stat = Stats()
 
+        if class_name == "bard":
+        
+            class_obj = Bard()
 
-        if class_name.lower() == "bard":
-            class_obj = Class.Bard()
+        print('here3')
         await ctx.send(f"You choose the {class_name} class!")
+        print('here4')
         await ctx.send(f"Based on your class of choice, your stats are:")
+        print('here5')
         await ctx.send(stat.statroll(class_obj))
+        print('here6')
 
         
 
