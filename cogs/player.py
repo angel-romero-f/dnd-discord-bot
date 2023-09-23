@@ -6,7 +6,7 @@ import sys
 sys.path.append('DND/')
 
 from Stats import Stats
-
+from DND.Stats import Stats
 
 class Player(commands.Cog):
     character_ids = {}
