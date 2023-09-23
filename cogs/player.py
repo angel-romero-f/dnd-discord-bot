@@ -37,9 +37,11 @@ class Player(commands.Cog):
         await ctx.send(f"You choose the {class_name} class!")
         print('here4')
         await ctx.send(f"Based on your class of choice, your stats are:")
-        print('here5')
-        await ctx.send(stat.statroll(class_obj))
-        print('here6')
+        try:
+            await ctx.send(stat.statroll(class_obj))
+        except Exception as e:
+            await ctx.send(f'{e}')
+            
 
         
 
