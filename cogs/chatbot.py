@@ -12,7 +12,7 @@ class ChatBot(commands.Cog):
     def generate_gpt3_response(self, prompt):
         try:
             response = openai.Completion.create(
-                engine="text-davinci-002",
+                model="text-davinci-003",
                 prompt=prompt,
                 max_tokens=150,
                 n=1,
