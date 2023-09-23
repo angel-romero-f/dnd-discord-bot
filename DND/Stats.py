@@ -63,6 +63,7 @@ class Stats(Character, Class):
             sum_rolls = sum(rolls)
             stats[statroll] = sum_rolls
         #to initialize hp for given classes. determines constitution modifier based on constitution
+        const_mod = 0
         if stats[1] < 10:
             if (7 < stats[1] <= 9):
                 const_mod = -1 
