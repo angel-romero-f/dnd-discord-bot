@@ -4,6 +4,7 @@ import asyncio
 import sys
 
 sys.path.append('DND/')
+sys.path.append('DND/Classes/')
 
 from Stats import Stats
 from Classes.Bard import Bard
