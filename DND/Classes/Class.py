@@ -19,6 +19,7 @@ class Class:
         Displays the relevant information about a character when requested
         """
         return f"Class Name: {self.class_name}\nClass Features: {repr(self.profiencies)}"
+    def get_name(self):
+        return self.class_name
 
-    
 
