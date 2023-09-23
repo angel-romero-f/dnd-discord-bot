@@ -13,12 +13,12 @@ class Race:
         self.race = race_name
 
     
-    def get_speed(self):
+    def get_base_speed(self):
         """
         returns base speed for this race
         """
         return self.base_speed
-    def get_ac(self):
+    def get_base_ac(self):
         """
         returns base AC for this race
         """
