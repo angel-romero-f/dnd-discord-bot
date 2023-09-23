@@ -1,4 +1,4 @@
-from DND import Class
+from Class import Class
 import random
 class Bard(Class):
     """

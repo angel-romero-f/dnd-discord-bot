@@ -1,23 +1,30 @@
 import openai
+import discord
 from discord.ext import commands
 import asyncio
 
 
-bot = commands.Bot(command_prefix='!')
+intents = discord.Intents.all()
+bot = commands.Bot(command_prefix = commands.when_mentioned_or('!'), intents = intents)
 
 @bot.event
 async def on_ready():
     print(f'We have logged in as {bot.user}')
 
 def generate_gpt3_response(prompt):
+    try:
         response = openai.Completion.create(
-        engine="text-davinci-002",
-        prompt=prompt,
-        max_tokens=150,
-        n = 1,
-        stop=None
-    )
+            engine="text-davinci-002",
+            prompt=prompt,
+            max_tokens=150,
+            n=1,
+            stop=None
+        )
         return response.choices[0].text
+    except Exception as e:
+        # Handle any exceptions here (e.g., print an error message)
+        print(f"Error generating GPT-3 response: {e}")
+        return "An error occurred while generating the response."
 
 @bot.event
 async def on_message(message):
@@ -45,4 +52,4 @@ async def talk_to_character(ctx, character: str):
     # Send the response back to the user
     await ctx.send(f"{character.capitalize()}: {response}")
 
-bot.run('YOUR_BOT_TOKEN')
+bot.run('MTE1NDk5NjUyNzA3MzM0NTU4Nw.Ga9JEb.2v5fCD73nONnyg7SPXfZ9ImxkE2Yv2rRggGxGI')
