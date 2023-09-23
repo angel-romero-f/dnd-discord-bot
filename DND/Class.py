@@ -1,5 +1,5 @@
-from cogs import Character
-class Class(Character):
+from DND import Character
+class Class:
     """
     Inputs: 
     class_name: takes in a valid string e.g. 'Bard', 'Cleric' and holds that class information
