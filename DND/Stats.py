@@ -42,7 +42,7 @@ class Stats(Character, Class):
         current_hp = current_hp + amount
 
 
-    def statroll(self):
+    def statroll(self, class_obj):
         """
         Rolls four 6 sided die, drops the smallest die and takes the sum of the other three
         Inputs: None
@@ -82,11 +82,11 @@ class Stats(Character, Class):
                 const_mod = 4
         else:
             const_mod = 0
-        if Class.class_name == "wizard":
+        if class_obj.get_name == "wizard":
             stats[-1] = 4 + const_mod
-        elif Class.class_name == "barbarian":
+        elif class_obj.get_name == "barbarian":
             stats[-1] = 12 + const_mod
-        elif Class.class_name == "bard":
+        elif class_obj.get_name == "bard":
             stats[-1] = 8 + const_mod
         return f"Strength: {stats[0]}\nDexterity: {stats[1]}\nConstitution: {stats[2]}\nIntelligence: {stats[3]}\nWisdom: {stats[4]}\nCharisma: {stats[5]}\nHP: {stats[-1]}"
 
