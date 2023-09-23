@@ -6,8 +6,12 @@ class Class:
     class_features: a list any particular feats that need to be declared on construction
     level: an integer with a default value of 1 to represent the level the character is at
     """
-    def __init__(self, class_name, hit_points, class_features, level=1):
-        super().__init__(class_name, hit_points, class_features, level)
+    
+    def __init__(self, profiencies, name):
+        self.name = name
+        self.profiiencies = profiencies
+
+
 
 
     def display_class_info(self):
