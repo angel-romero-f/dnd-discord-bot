@@ -12,13 +12,15 @@ class ChatBot(commands.Cog):
     def generate_gpt3_response(self, prompt):
         try:
             response = openai.Completion.create(
-                engine="text-davinci-002",
+                model="text-davinci-003",
                 prompt=prompt,
-                max_tokens=150,
-                n=1,
-                stop=None
+                temperature=1,
+                max_tokens = 100
             )
-            return response.choices[0].text
+            response_dict = response.get('choice')
+            if response_dict:
+                prompt_resp = response_dict[0]['text']
+            return prompt_resp
         except Exception as e:
             # Handle any exceptions here (e.g., print an error message)
             print(f"Error generating GPT-3 response: {e}")
