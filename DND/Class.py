@@ -22,13 +22,4 @@ class Class(Character):
         for feature in self.class_features:
             print("- " + feature)
 
-    def level_up(self):
-        """
-        Increases the level of a character by 1
-        Notes: 
-        Should be overriden in each class since this get complex real quick and are different between classes
-        Should probably be a DM only function
-        """
-        self.level += 1
-        self.hit_points += 5  #We can use the roll function to roll more health
-        print(f"{self.class_name} leveled up to level {self.level}!")
+
