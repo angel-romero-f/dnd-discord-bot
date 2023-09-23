@@ -56,7 +56,7 @@ class Stats(Character, Class):
         Wisdom : int 
         Charisma : int 
         """
-        stats = [self.strength, self.constitution, self.dexterity, self.wisdom, self.intelligence, self.charisma, self.hit_points]
+        stats = [self.strength, self.dexterity, self.constitution, self.wisdom, self.intelligence, self.charisma, self.hit_points]
         #rolls 4 die and discards the lowest dice. Sums the remaining die and tethers it to the corresponding stat
         for statroll in range(6):
             rolls = [random.randint(1, 6) for _ in range(4)]
@@ -66,7 +66,7 @@ class Stats(Character, Class):
             stats[statroll] = sum_rolls
         #to initialize hp for given classes. determines constitution modifier based on constitution
         const_mod = 0
-        if stats[1] < 10:
+        if stats[2] < 10:
             if (7 < stats[1] <= 9):
                 const_mod = -1 
             elif (5 < stats[1] <= 7):
@@ -75,7 +75,7 @@ class Stats(Character, Class):
                 const_mod = -3 
             else:
                 const_mod = -4
-        elif stats[1] > 10:
+        elif stats[2] > 10:
             if (11 <= stats[1] < 13):
                 const_mod = 1
             elif (13 <= stats[1] < 15):
