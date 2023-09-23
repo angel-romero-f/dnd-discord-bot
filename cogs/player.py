@@ -4,10 +4,12 @@ import asyncio
 import sys
 
 sys.path.append('DND/')
+sys.path.append('DND/Classes/')
 
 from Stats import Stats
 from Classes.Bard import Bard
-
+from Classes.Rogue import Rogue
+from Classes.Barbarian import Barbarian
 
 class Player(commands.Cog):
     character_ids = {}
@@ -25,6 +27,11 @@ class Player(commands.Cog):
         if class_name == "bard":
         
             class_obj = Bard()
+        elif class_name == "rogue":
+            class_obj = Rogue()
+        elif class_name == "barbarian":
+            class_obj = Barbarian()
+        
 
         print('here3')
         await ctx.send(f"You choose the {class_name} class!")
