@@ -29,7 +29,7 @@ class Player(commands.Cog):
         stat = Stats()
         stat_rolls = stat.statroll()
         await ctx.send(f'Your stats are: \n{stat_rolls}')
-        
+    
 
 async def setup(client):
     await client.add_cog(Player(client))
