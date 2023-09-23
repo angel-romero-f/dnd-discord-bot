@@ -1,5 +1,5 @@
 from Character import Character
-from Class import Class
+from Classes.Class import Class
 import random 
 import discord
 from discord.ext import commands
