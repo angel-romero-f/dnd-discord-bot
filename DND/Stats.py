@@ -9,8 +9,8 @@ class Stats(Character):
     Should initalize with the information of level, race, and class that way it knows what to make each stat and how to modify it
     Making use of methods like roll may be useful to create methods in here, should probably br able to display
     """
-    def __init__(self, hit_points, strength, constitution, dexterity, wisdom, intelligence, charisma, char_lvl):
-        self.hit_points = hit_points
+    def __init__(self, hit_points, strength, cons, dext, wis, intelligence, charisma, char_lvl):
+        self.health_points = hit_points
         self.strength = strength 
         self.constitution = constitution
         self.dexterity = dexterity
@@ -35,7 +35,6 @@ class Stats(Character):
     def hp_change(self, amount):
         """
         How the hp of the characters evolves throughout the game. Independent of the total hitpoints. 
-        """
         current_hp = current_hp + amount
 
 
