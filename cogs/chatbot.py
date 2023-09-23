@@ -12,14 +12,19 @@ async def on_ready():
     print(f'We have logged in as {bot.user}')
 
 def generate_gpt3_response(prompt):
+    try:
         response = openai.Completion.create(
-        engine="text-davinci-002",
-        prompt=prompt,
-        max_tokens=150,
-        n = 1,
-        stop=None
-    )
+            engine="text-davinci-002",
+            prompt=prompt,
+            max_tokens=150,
+            n=1,
+            stop=None
+        )
         return response.choices[0].text
+    except Exception as e:
+        # Handle any exceptions here (e.g., print an error message)
+        print(f"Error generating GPT-3 response: {e}")
+        return "An error occurred while generating the response."
 
 @bot.event
 async def on_message(message):
