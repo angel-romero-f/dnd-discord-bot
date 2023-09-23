@@ -1,7 +1,11 @@
 import discord
 from discord.ext import commands
 import asyncio
+import sys
 
+sys.path.append('/Users/adenbriano/Desktop/HackRice/dnd-discord-bot/DND/')
+
+from Stats import Stats
 
 class Player(commands.Cog):
     character_ids = {}
