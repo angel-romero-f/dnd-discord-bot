@@ -9,7 +9,7 @@ class Stats(Character):
     Should initalize with the information of level, race, and class that way it knows what to make each stat and how to modify it
     Making use of methods like roll may be useful to create methods in here, should probably br able to display
     """
-    def __init__(self, hit_points, strength, constitution, dexterity, wisdom, intelligence, charisma, char_lvl):
+    def __init__(self, hit_points=4, strength=0, constitution=0, dexterity=0, wisdom=0, intelligence=0, charisma=0, char_lvl=1):
         self.health_points = hit_points
         self.strength = strength 
         self.constitution = constitution
@@ -57,7 +57,6 @@ class Stats(Character):
             rolls = [random.randint(1, 6) for _ in range(5)]
             discard_roll = min(rolls)
             rolls.pop(discard_roll)
-            for roll in rolls:
-                stat = stat + roll
-                stats[statroll] = stat
-        return "Strength: " + str(stats[0]) + ", Dexterity: " + str(stats[1]) + ", Constitution: " + str(stats[2]) + ", Intelligence: " + str(stats[3]) + ", Wisdom: " + str(stats[4]) + ", Charisma: " + str(stats[5])
+            sum_rolls = sum(rolls)
+            stats[sum_rolls] = stat
+        return "Strength: " + str(stats[0]) + "/n Dexterity: " + str(stats[1]) + "/n Constitution: " + str(stats[2]) + "/n Intelligence: " + str(stats[3]) + "/n Wisdom: " + str(stats[4]) + "/n Charisma: " + str(stats[5])
