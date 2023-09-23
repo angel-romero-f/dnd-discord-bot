@@ -27,8 +27,8 @@ class Stats(Character):
         self.current_hp += 5 
         print(f"{self.class_name} leveled up to level {self.char_lvl}!")
 
-    def hp_change(self):
+    def hp_change(self, amount):
         """
         How the hp of the characters evolves throughout the game. Independent of the total hitpoints. 
         """
-                
+        current_hp = current_hp + amount          
