@@ -24,8 +24,8 @@ class Spell(Stats):
         Method to make the spell have an affect
         '''
         if spell.lower() == "fire bolt":
-            amount = random.randint(1, 10)
+            amount = random.randint(1, 11)
             target.hp_change(-amount)
         if spell.lower() == "cure wounds":
-            amount = random.randint(1, 8)
+            amount = random.randint(1, 9)
             target.hp_change(amount)
