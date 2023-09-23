@@ -67,31 +67,31 @@ class Stats(Character, Class):
         #to initialize hp for given classes. determines constitution modifier based on constitution
         const_mod = 0
         if stats[2] < 10:
-            if (7 < stats[1] <= 9):
+            if (7 < stats[2] <= 9):
                 const_mod = -1 
-            elif (5 < stats[1] <= 7):
+            elif (5 < stats[2] <= 7):
                 const_mod = -2
-            elif (3 < stats[1] <= 5):
+            elif (3 < stats[2] <= 5):
                 const_mod = -3 
             else:
                 const_mod = -4
         elif stats[2] > 10:
-            if (11 <= stats[1] < 13):
+            if (11 <= stats[2] < 13):
                 const_mod = 1
-            elif (13 <= stats[1] < 15):
+            elif (13 <= stats[2] < 15):
                 const_mod = 2
-            elif (15 <= stats[1] < 17):
+            elif (15 <= stats[2] < 17):
                 const_mod = 3
             else:
                 const_mod = 4
         #adds constitution modifier to base hp depending on class input by user
         else:
             const_mod = 0
-        if (class_obj.get_name().lower() == "wizard"):
-            stats[-1] = 4 + const_mod
-        elif (class_obj.get_name().lower() == "barbarian"):
+        if (class_obj.get_name() == "rogue"):
+            stats[-1] = 6 + const_mod
+        elif (class_obj.get_name() == "barbarian"):
             stats[-1] = 12 + const_mod
-        elif (class_obj.get_name().lower() == "bard"):
+        elif (class_obj.get_name() == "bard"):
             stats[-1] = 8 + const_mod
-        return f"Strength: {stats[0]}\nDexterity: {stats[1]}\nConstitution: {stats[2]}\nIntelligence: {stats[3]}\nWisdom: {stats[4]}\nCharisma: {stats[5]}\nHP: {stats[-1]}"
+        return f"Strength: {stats[0]}\nDexterity: {stats[1]}\nConstitution: {stats[2]}\nWisdom: {stats[3]}\nIntelligence: {stats[4]}\nCharisma: {stats[5]}\nHP: {stats[-1]}"
 
