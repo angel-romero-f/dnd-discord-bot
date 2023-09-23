@@ -1,8 +1,8 @@
 import discord
 from discord.ext import commands
 import asyncio
-import random
-import cogs.misc
+
+
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix = commands.when_mentioned_or('!'), intents = intents)

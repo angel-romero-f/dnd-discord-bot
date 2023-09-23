@@ -9,6 +9,7 @@ class Race:
     resistances = []
     height = 0
     dark_vision = False
+    languages = ["Common"]
 
     def __init__(self, race_name):
         self.race = race_name
