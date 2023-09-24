@@ -8,13 +8,14 @@ class Character():
     This is the root class from which Race, Stats, and Class classes should stem
     I added some basic inputs but could easily add more
     """
-    def __init__(self, race: Race, class_obj: Class, stats: Stats):
+    def __init__(self, race: Race, class_obj: Class, stats: Stats, name: str):
         '''
         Initializes a character with all the needed values
         '''
         self.race = race
         self.class_obj = class_obj
-        self.stats = stats  
+        self.stats = stats      
+        self.name = name
     
     #attack
     #dodge
@@ -62,6 +63,13 @@ class Character():
         line1 = self.class_obj.display_class_info()
         line2 = "Strength: {stats[0]}\nDexterity: {stats[1]}\nConstitution: {stats[2]}\nWisdom: {stats[3]}\nIntelligence: {stats[4]}\nCharisma: {stats[5]}\nHP: {stats[-1]}"
         return f'{line1}\n+{line2}'
+    
+    def get_class(self):
+        return self.class_obj
+    def get_race(self):
+        return self.race
+    def get_name(self):
+        return self.name
         
 
 

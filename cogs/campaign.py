@@ -18,7 +18,7 @@ from Classes.Barbarian import Barbarian
 from Character import Character
 
 class Campaign(commands.Cog):
-    character_ids = {}
+    character_ids = dict()
     party = []
     campaign_name = ''
     campaign = False
@@ -80,7 +80,7 @@ class Campaign(commands.Cog):
 
     @commands.command(name = "char_name")
     async def char_name(self, ctx: commands.Context):
-        await ctx.send(self.character_ids[ctx.author])
+        await ctx.send(self.character_ids[ctx.author].get_name())
     
     @commands.command(name = "player_info")
     async def player_info(self, ctx: commands.Context):
@@ -92,7 +92,7 @@ class Campaign(commands.Cog):
         Current_hp: str
         """
 
-        await ctx.send(self.character_ids[ctx.author].get_info())
+        await ctx.send(f"Player name: {self.character_ids[ctx.author].get_name()} \n Class: {self.character_ids[ctx.author].get_class().get_name()} \n Race: {self.character_ids[ctx.author].get_race().get_name()}")
 
             
 

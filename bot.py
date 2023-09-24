@@ -15,7 +15,7 @@ async def on_ready():
 
 async def main():
 	await bot.load_extension('cogs.misc')
-	#await bot.load_extension('cogs.player')
+	await bot.load_extension('cogs.campaign')
 	await bot.load_extension('cogs.chatbot')
 	await bot.load_extension('cogs.encounters')
 
