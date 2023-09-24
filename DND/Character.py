@@ -48,5 +48,8 @@ class Character():
         line2 = "Strength: {stats[0]}\nDexterity: {stats[1]}\nConstitution: {stats[2]}\nWisdom: {stats[3]}\nIntelligence: {stats[4]}\nCharisma: {stats[5]}\nHP: {stats[-1]}"
         return f'{line1}\n+{line2}'
         
-
-
+    def get_class(self):
+        return self.class_obj
+    def get_race(self):
+        return self.race
+    

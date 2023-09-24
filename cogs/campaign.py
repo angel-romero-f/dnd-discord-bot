@@ -21,6 +21,7 @@ class Campaign(commands.Cog):
     character_ids = {}
     party = []
     campaign_name = ''
+    campaign = False
 
     def __init__(self, client):
         self.client = client
@@ -30,8 +31,12 @@ class Campaign(commands.Cog):
         """
         Starts a new campaign
         """
+        if self.campaign:
+            await ctx.send("There is already a campaign in progress!")
+            return
         self.campaign_name = name
-        await ctx.send(f'The group is off on their adventure of {name}')
+        self.campaign = True
+        await ctx.send(f'The group is off on their adventure of {name}!')
 
     @commands.command(name = 'campaign_info')
     async def campaign_info(self, ctx: commands.Context):

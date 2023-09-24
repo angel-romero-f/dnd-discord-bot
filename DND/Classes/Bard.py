@@ -17,3 +17,4 @@ class Bard(Class):
         return self.max_slots
     def set_curr_slots(self, amt):
         self.curr_slots = amt
+    
