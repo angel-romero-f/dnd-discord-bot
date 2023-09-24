@@ -21,11 +21,16 @@ class Spell(Stats):
     
     def cast(spell, target):
         '''
-        Method to make the spell have an affect
+        Method to make the spell have an effect
         '''
         if spell.lower() == "fire bolt":
-            amount = random.randint(1, 11)
-            target.hp_change(amount)
+            successful = True if random.randint(1,20) > 8 else False
+            if successful:
+                dmg = random.randint(1, 11)
+                target.get_stats().hp_change(-dmg)
+                return f"Your hit was a success and it did {dmg} damage!"
+        else:
+            return "Lol you missed"
 
         if spell.lower() == "cure wounds":
             amount = random.randint(1, 9)

@@ -52,7 +52,14 @@ class Campaign(commands.Cog):
             await ctx.send(f"Your current stats are...\nStrength: {self.character_ids[name].get_stats().get_strength()} \nDexterity: {self.character_ids[name].get_stats().get_dexterity()} \nConstitution: {self.character_ids[name].get_stats().get_constitution()} \nWisdom: {self.character_ids[name].get_stats().get_wisdom()} \nIntelligence: {self.character_ids[name].get_stats().get_intelligence()} \nCharisma: {self.character_ids[name].get_stats().get_charisma()} \nCurrent Level: {self.character_ids[name].get_stats().get_lvl()} \nHP: {self.character_ids[name].get_stats().get_hp()}")
         else:
             await ctx.send("You are not authorized to use this command.")
-        
+    @commands.command(name = 'spellbook')
+    async def spellbook(self, ctx):
+        """
+        Returns a list of spells and their descriptions. 
+        """
+        ctx.send("Fire Bolt: You hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 fire damage. A flammable object hit by this spell ignites if it isn’t being worn or carried. This spell’s damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10). \nCure Wounds: A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs. At Higher Levels: When you cast this spell using a spell slot of 2nd level or higher, the Healing increases by 1d8 for each slot level above 1st.\nCreate Water: You either create or destroy water. Create Water. You create up to 10 gallons of clean water within range in an open container. Alternatively, the water falls as rain in a 30-foot cube within range, extinguishing exposed flames in the area. Destroy Water. You destroy up to 10 gallons of water in an open container within range. Alternatively, you destroy fog in a 30-foot cube within range. At Higher Levels: When you cast this spell using a spell slot of 2nd level or higher, you create or destroy 10 additional gallons of water, or the size of the cube increases by 5 feet, for each slot level above 1st.")
+    @commands.command(name = 'cast')
+    async def cast(self, ctx):    
 
 
     @commands.command(name = 'campaign_info')
