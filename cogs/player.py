@@ -61,50 +61,5 @@ class Player(commands.Cog):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @commands.command(name = 'level_up',
-                      brief = 'levels up a character')
-    async def level_up(self, ctx: commands.Context, user):
-        """
-        Levels up a character and returns the new stats
-        """
-        print('here')
-        try:   
-            character = self.character_ids[user]
-        except Exception as e:
-            await ctx.send(f'e')
-        print('here')
-
-        character.get_stats().level_up()
-        await ctx.send(character.get_info())
-
 async def setup(client):
     await client.add_cog(Player(client))
