@@ -137,18 +137,18 @@ class Campaign(commands.Cog):
             return
         await ctx.send(f"{self.character_ids[ctx.author].get_name()} is attempting an {type} attack against {self.enemies[enemy].get_name()}.")
 
+
+        msg = self.character_ids[ctx.author].attackc(type, self.enemies[enemy])
+        await ctx.send(msg)
+
+
         try:
-            msg = self.character_ids[ctx.author].attackc(type, self.enemies[enemy])
-            await ctx.send(msg)
+            if self.enemies[enemy].check_death():
+                await ctx.send(f"{self.character_ids[ctx.author].get_name()} has defeated {self.enemies[enemy].get_name()}")
+                self.enemies.remove(enemy)
         except Exception as e:
-            print(e)
-            await ctx.send(f'lol doesnt work {e}')
-
-        if self.enemies[enemy].check_death():
-            await ctx.send(f"{self.character_ids[ctx.author].get_name()} has defeated {self.enemies[enemy].get_name()}")
-            self.enemies.remove(enemy)
+            await ctx.send(f'{e}')
         
-
 
 async def setup(client):
     await client.add_cog(Campaign(client))

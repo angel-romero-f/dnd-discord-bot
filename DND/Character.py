@@ -64,7 +64,7 @@ class Character():
     def get_name(self):
         return self.name
     def check_death(self):
-        return self.stats.get_hp <= 0
+        return self.stats.get_hp() <= 0
     
 
 
