@@ -65,11 +65,5 @@ def get_character_id(self):
     """
     return self.character_ids
 
-def get_player_info(self, ):
-    """
-    Returns player data.
-    """
-    return f"Class: {class_name}\nRace: {repr(self.profiencies)}"
-
 async def setup(client):
     await client.add_cog(Player(client))
