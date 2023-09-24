@@ -8,4 +8,4 @@ class Bard(Class):
     """
     def __init__(self):
         super().__init__(["Musical", "Armor"], "bard")
-    
+        self.speciality = 'Inspiration' 
