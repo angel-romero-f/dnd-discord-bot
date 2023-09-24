@@ -59,11 +59,11 @@ class Campaign(commands.Cog):
         elif class_name.lower() == "barbarian":
             class_obj = Barbarian()
         
-        if race_name.lower() == 'Human':
+        if race_name.lower() == 'human':
             race_obj = Human()
-        elif race_name.lower() == 'Dwarf':
+        elif race_name.lower() == 'dwarf':
             race_obj = Dwarf()
-        elif race_name.lower() == 'Goblin':
+        elif race_name.lower() == 'goblin':
             race_obj = Goblin()
 
         await ctx.send(f"You chose the {class_name} class and the {race_name} race!")
@@ -91,7 +91,7 @@ class Campaign(commands.Cog):
         Race: str
         Current_hp: str
         """
-        await ctx.send(f"Player name: {ctx.author} \nClass: {self.character_ids[ctx.author].get_class()} \nRace: {self.character_ids[ctx.author].get_race()}")
+        await ctx.send(f"Player name: {self.character_ids[ctx.author].get_name()} \nClass: {self.character_ids[ctx.author].get_class().get_name} \nRace: {self.character_ids[ctx.author].get_race().get_name()}")
 
 
 
