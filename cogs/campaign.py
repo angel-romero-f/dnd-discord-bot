@@ -91,9 +91,10 @@ class Campaign(commands.Cog):
         Race: str
         Current_hp: str
         """
-
-        await ctx.send(f"Player name: {self.character_ids[ctx.author].get_name()} \n Class: {self.character_ids[ctx.author].get_class().get_name()} \n Race: {self.character_ids[ctx.author].get_race().get_name()}")
-
+        try:
+            await ctx.send(f"Character name: {self.character_ids[ctx.author].get_name()} \nClass: {self.character_ids[ctx.author].get_class().get_name()} \nRace: {self.character_ids[ctx.author].get_race().get_name()}")
+        except Exception as e:
+            await ctx.send(f'{e}')
             
 
 async def setup(client):

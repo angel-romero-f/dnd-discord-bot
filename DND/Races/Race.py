@@ -36,4 +36,4 @@ class Race:
         """
         return self.get_dark_vision
     def get_name(self):
-        return self.name
+        return self.race
