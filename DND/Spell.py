@@ -29,8 +29,8 @@ class Spell(Stats):
                 dmg = random.randint(1, 11)
                 target.get_stats().hp_change(-dmg)
                 return f"Your hit was a success and it did {dmg} damage!"
-        else:
-            return "Lol you missed"
+            else:
+                return "Lol you missed"
 
         if spell.lower() == "cure wounds":
             amount = random.randint(1, 9)
