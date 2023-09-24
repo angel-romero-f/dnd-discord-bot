@@ -141,14 +141,17 @@ class Stats(Character, Class):
         """
         self.char_lvl += 1
         if (class_obj.get_name() == "rogue"):
-            self.hit_points += Stats.roll(8, 1) + self.const_mod
-            self.current_hp += Stats.roll(8, 1) + self.const_mod
+            added_health = Stats.roll(8, 1) + self.const_mod
+            self.hit_points += added_health
+            self.current_hp += added_health
         elif (class_obj.get_name() == "barbarian"):
-            self.hit_points += Stats.roll(12, 1) + self.const_mod
-            self.current_hp += Stats.roll(12, 1) + self.const_mod
+            added_health = Stats.roll(12, 1) + self.const_mod
+            self.hit_points += added_health
+            self.current_hp += added_health
         elif (class_obj.get_name() == "bard"):
-            self.hit_points += Stats.roll(8, 1) + self.const_mod
-            self.current_hp += Stats.roll(8, 1) + self.const_mod
+            added_health = Stats.roll(8, 1) + self.const_mod
+            self.hit_points += added_health
+            self.current_hp += added_health
         print(f"{self.class_name} leveled up to level {self.char_lvl}!")
     
     def get_lvl(self):
