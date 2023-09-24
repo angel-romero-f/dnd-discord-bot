@@ -26,7 +26,7 @@ class Character():
         Changes the value of hp for a character by a set amount
         '''
         self.stats.hp_change(amount)
-    def attack(self, attack: str, target):
+    def attackc(self, attack: str, target):
         '''
         Represents a character attack, uses attacks that a character can do to modify the health of another
         character

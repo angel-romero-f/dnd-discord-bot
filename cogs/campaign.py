@@ -85,7 +85,7 @@ class Campaign(commands.Cog):
         self.character_ids[ctx.author] = char
         if enemy:
             self.enemies.append(char)
-        self.party.append(name)
+        self.party.append(char)
 
     
 
@@ -112,7 +112,7 @@ class Campaign(commands.Cog):
         await ctx.send(f"Here's a list of the current enemies.")
         for idx, enemy in enumerate(self.enemies):
             
-            await ctx.send(f'{idx+1} - {enemy.get_name()}' )
+            await ctx.send(f'{idx} - {enemy.get_name()}' )
     @commands.command(name = 'attack')
     async def attack(self, ctx: commands.Context, enemy: int, type : str):
         if type != "armed" and type != "unarmed":
@@ -124,10 +124,11 @@ class Campaign(commands.Cog):
         await ctx.send(f"{self.character_ids[ctx.author].get_name()} is attempting an {type} attack against {self.enemies[enemy].get_name()}.")
 
         try:
-            msg = self.character_ids[ctx.author].attack(type, self.enemies[enemy])
+            msg = self.character_ids[ctx.author].attackc(type, self.enemies[enemy])
             await ctx.send(msg)
         except Exception as e:
-            await ctx.send(f'{e}')
+            print(e)
+            await ctx.send(f'lol doesnt work {e}')
 
         if self.enemies[enemy].check_death():
             await ctx.send(f"{self.character_ids[ctx.author].get_name()} has defeated {self.enemies[enemy].get_name()}")
