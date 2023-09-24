@@ -32,9 +32,13 @@ class Campaign(commands.Cog):
         """
         Starts a new campaign
         """
+        roles = ctx.author.roles
         if self.campaign:
-            await ctx.send("There is already a campaign in progress!")
-            return
+            if "DM" in ctx.author.roles:
+                await ctx.send("There is already a campaign in progress!")
+                return
+            else:
+                await ctx.send("You're not authorized to use this command bozo!!")
         self.campaign_name = name
         self.campaign = True
         await ctx.send(f'The group is off on their adventure of {name}!')
