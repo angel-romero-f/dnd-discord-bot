@@ -23,6 +23,48 @@ class Stats(Character, Class):
         self.char_lvl = char_lvl
         self.current_hp = hit_points
     
+    def get_hp(self):
+        """
+        Returns the current healthpoints of the character.
+        """
+        return self.current_hp
+    
+    def get_strength(self):
+        """
+        Returns the strength of the character
+        """
+        return self.strength
+
+    def get_constitution(self):
+        """
+        Returns the constitution of the character.
+        """
+        return self.constitution
+
+    def get_dexterity(self):
+        """
+        Returns the dexterity of the character.
+        """
+        return self.dexterity
+
+    def get_wisdom(self):
+        """
+        Returns the wisdom of the character.
+        """
+        return self.wisdom
+    
+    def get_intelligence(self):
+        """
+        Returns the intelligence of the character.
+        """
+        return self.intelligence
+    
+    def get_charisma(self):
+        """
+        Returns the charisma of the character.
+        """
+        return self.charisma
+
     def roll(self, n, k):
         """
         Rolls k amount n-sided die. Can be used for health addition when leveling up. 
@@ -31,9 +73,9 @@ class Stats(Character, Class):
         """
         die = [random.randint(1, n) for _ in range(k)]
         return sum(die)
+    
     def level_up(self, class_obj):
         """
-        
         Increases the level of a character by 1. Increases hp by a die roll corresponding to player class.
         Inputs: class_obj = class object
         Barbarian: d12
@@ -45,14 +87,21 @@ class Stats(Character, Class):
         """
         self.char_lvl += 1
         if (class_obj.get_name() == "rogue"):
-            added_health = Stats.roll(8, 1) + self.const_mod
+            self.hit_points += Stats.roll(8, 1) + self.const_mod
+            self.current_hp += Stats.roll(8, 1) + self.const_mod
         elif (class_obj.get_name() == "barbarian"):
-            added_health = Stats.roll(12, 1) + self.const_mod
+            self.hit_points += Stats.roll(12, 1) + self.const_mod
+            self.current_hp += Stats.roll(12, 1) + self.const_mod
         elif (class_obj.get_name() == "bard"):
-            added_health = Stats.roll(8, 1) + self.const_mod
-        self.hit_points += 5  #We can use the roll function to roll more health
-        self.current_hp += 5 
+            self.hit_points += Stats.roll(8, 1) + self.const_mod
+            self.current_hp += Stats.roll(8, 1) + self.const_mod
         print(f"{self.class_name} leveled up to level {self.char_lvl}!")
+    
+    def get_lvl(self):
+        """
+        Returns the level of the character.
+        """
+        return self.char_lvl
 
     def hp_change(self, amount):
         """
