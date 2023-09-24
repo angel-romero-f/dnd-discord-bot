@@ -24,12 +24,12 @@ class Player(commands.Cog):
         class_obj = None
         stat = Stats()
 
-        if class_name == "bard":
+        if class_name.lower() == "bard":
         
             class_obj = Bard()
-        elif class_name == "rogue":
+        elif class_name.lower() == "rogue":
             class_obj = Rogue()
-        elif class_name == "barbarian":
+        elif class_name.lower() == "barbarian":
             class_obj = Barbarian()
         
 
