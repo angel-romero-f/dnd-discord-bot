@@ -74,7 +74,7 @@ class Campaign(commands.Cog):
             await ctx.send(f'{e}')
         char = Character(race_obj, class_obj, stat)
         self.character_ids[ctx.author] = char
-        self.party.append(char)
+        self.party.append(name)
 
     
 
