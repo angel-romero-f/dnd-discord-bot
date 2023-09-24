@@ -215,5 +215,11 @@ class Stats(Class):
         elif (class_obj.get_name() == "bard"):
             stats[-1] = 8 + self.const_mod
         self.current_hp = stats[-1]
+        self.strength = stats[0]
+        self.dexterity = stats[1]
+        self.constitution = stats[2]
+        self.intelligence = stats[3]
+        self.wisdom = stats[4]
+        self.charisma = stats[5]
         return f"Strength: {stats[0]}\nDexterity: {stats[1]}\nConstitution: {stats[2]}\nWisdom: {stats[3]}\nIntelligence: {stats[4]}\nCharisma: {stats[5]}\nHP: {stats[-1]}"
 
