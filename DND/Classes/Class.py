@@ -6,10 +6,11 @@ class Class:
     class_features: a list any particular feats that need to be declared on construction
     level: an integer with a default value of 1 to represent the level the character is at
     """
-    speciality = '' 
+    
     def __init__(self, profiencies, name):
         self.class_name = name
         self.profiencies = profiencies
+        self.speciality = '' 
 
 
 
