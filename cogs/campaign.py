@@ -145,7 +145,7 @@ class Campaign(commands.Cog):
         try:
             if self.enemies[enemy].check_death():
                 await ctx.send(f"{self.character_ids[ctx.author].get_name()} has defeated {self.enemies[enemy].get_name()}")
-                self.enemies.remove(enemy)
+                self.enemies.pop(enemy)
         except Exception as e:
             await ctx.send(f'{e}')
         
