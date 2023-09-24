@@ -23,6 +23,7 @@ class DM(Player, commands.Cog):
         Levels up a character and returns the new stats
         """
         character = self.character_ids[user]
+        print(character)
         character.get_stats().level_up()
         await ctx.send(character.get_info())
 
