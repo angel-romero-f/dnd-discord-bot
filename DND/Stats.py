@@ -6,14 +6,12 @@ import discord
 from discord.ext import commands
 import asyncio
 
-
-
-
 class Stats(Character, Class):
     """
     Should initalize with the information of level, race, and class that way it knows what to make each stat and how to modify it
     Making use of methods like roll may be useful to create methods in here, should probably br able to display
     """
+    const_mod = 0
     def __init__(self, hit_points=4, strength=0, constitution=0, dexterity=0, wisdom=0, intelligence=0, charisma=0, char_lvl=1):
         self.hit_points = hit_points
         self.strength = strength 
@@ -25,17 +23,85 @@ class Stats(Character, Class):
         self.char_lvl = char_lvl
         self.current_hp = hit_points
     
-    def level_up(self):
+    def get_hp(self):
         """
-        Increases the level of a character by 1
+        Returns the current healthpoints of the character.
+        """
+        return self.current_hp
+    
+    def get_strength(self):
+        """
+        Returns the strength of the character
+        """
+        return self.strength
+
+    def get_constitution(self):
+        """
+        Returns the constitution of the character.
+        """
+        return self.constitution
+
+    def get_dexterity(self):
+        """
+        Returns the dexterity of the character.
+        """
+        return self.dexterity
+
+    def get_wisdom(self):
+        """
+        Returns the wisdom of the character.
+        """
+        return self.wisdom
+    
+    def get_intelligence(self):
+        """
+        Returns the intelligence of the character.
+        """
+        return self.intelligence
+    
+    def get_charisma(self):
+        """
+        Returns the charisma of the character.
+        """
+        return self.charisma
+
+    def roll(self, n, k):
+        """
+        Rolls k amount n-sided die. Can be used for health addition when leveling up. 
+        Inputs: n = integer representing the number of sides on the die
+        Outputs: integer representing the number on the die
+        """
+        die = [random.randint(1, n) for _ in range(k)]
+        return sum(die)
+    
+    def level_up(self, class_obj):
+        """
+        Increases the level of a character by 1. Increases hp by a die roll corresponding to player class.
+        Inputs: class_obj = class object
+        Barbarian: d12
+        Rogue: d8 
+        Bard: d8
         Notes: 
         Should be overriden in each class since this get complex real quick and are different between classes
         Should probably be a DM only function
         """
         self.char_lvl += 1
-        self.hit_points += 5  #We can use the roll function to roll more health
-        self.current_hp += 5 
+        if (class_obj.get_name() == "rogue"):
+            self.hit_points += Stats.roll(8, 1) + self.const_mod
+            self.current_hp += Stats.roll(8, 1) + self.const_mod
+        elif (class_obj.get_name() == "barbarian"):
+            self.hit_points += Stats.roll(12, 1) + self.const_mod
+            self.current_hp += Stats.roll(12, 1) + self.const_mod
+        elif (class_obj.get_name() == "bard"):
+            self.hit_points += Stats.roll(8, 1) + self.const_mod
+            self.current_hp += Stats.roll(8, 1) + self.const_mod
         print(f"{self.class_name} leveled up to level {self.char_lvl}!")
+    
+    def get_lvl(self):
+        """
+        Returns the level of the character.
+        """
+        return self.char_lvl
 
     def hp_change(self, amount):
         """
@@ -65,33 +131,33 @@ class Stats(Character, Class):
             sum_rolls = sum(rolls)
             stats[statroll] = sum_rolls
         #to initialize hp for given classes. determines constitution modifier based on constitution
-        const_mod = 0
+        self.const_mod = 0
         if stats[2] < 10:
             if (7 < stats[2] <= 9):
-                const_mod = -1 
+                self.const_mod = -1 
             elif (5 < stats[2] <= 7):
-                const_mod = -2
+                self.const_mod = -2
             elif (3 < stats[2] <= 5):
-                const_mod = -3 
+                self.const_mod = -3 
             else:
-                const_mod = -4
+                self.const_mod = -4
         elif stats[2] > 10:
             if (11 <= stats[2] < 13):
-                const_mod = 1
+                self.const_mod = 1
             elif (13 <= stats[2] < 15):
-                const_mod = 2
+                self.const_mod = 2
             elif (15 <= stats[2] < 17):
-                const_mod = 3
+                self.const_mod = 3
             else:
-                const_mod = 4
+                self.const_mod = 4
         #adds constitution modifier to base hp depending on class input by user
         else:
-            const_mod = 0
+            self.const_mod = 0
         if (class_obj.get_name() == "rogue"):
-            stats[-1] = 6 + const_mod
+            stats[-1] = 6 + self.const_mod
         elif (class_obj.get_name() == "barbarian"):
-            stats[-1] = 12 + const_mod
+            stats[-1] = 12 + self.const_mod
         elif (class_obj.get_name() == "bard"):
-            stats[-1] = 8 + const_mod
+            stats[-1] = 8 + self.const_mod
         return f"Strength: {stats[0]}\nDexterity: {stats[1]}\nConstitution: {stats[2]}\nWisdom: {stats[3]}\nIntelligence: {stats[4]}\nCharisma: {stats[5]}\nHP: {stats[-1]}"
 
