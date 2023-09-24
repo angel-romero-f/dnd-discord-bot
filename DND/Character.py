@@ -35,7 +35,7 @@ class Character():
         succesful = True if random.randint(1,20) > target.race.get_base_ac() else False
         if succesful:
             target.get_stats().hp_change(-dmg)
-            return "Your hit was a success and it did {dmg} damage!"
+            return f"Your hit was a success and it did {dmg} damage!"
         else:
             return "Lol you missed"
 
