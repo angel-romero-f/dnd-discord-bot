@@ -48,7 +48,8 @@ class Campaign(commands.Cog):
 
     @commands.command(name = 'new_char')
     async def new_char(self, ctx: commands.Context, name: str, class_name: str, race_name: str, enemy = False):
-        await ctx.send(f'hello {name}!' )
+
+
         class_obj = None
         race_obj = None
         stat = Stats()
@@ -66,14 +67,14 @@ class Campaign(commands.Cog):
             race_obj = Dwarf()
         elif race_name.lower() == 'goblin':
             race_obj = Goblin()
-
-        await ctx.send(f"You chose the {class_name} class and the {race_name} race!")
-        await ctx.send(f"Based on your class of choice, your stats are:")
-        try:
+        if not enemy:
+            await ctx.send(f'hello {name}!' )
+            await ctx.send(f"You chose the {class_name} class and the {race_name} race!")
+            await ctx.send(f"Based on your class of choice, your stats are:")
             await ctx.send(stat.statroll(class_obj))
-        except Exception as e:
-            await ctx.send(f'{e}')
-        
+        else:
+            await ctx.send("Succesfully created an enemy.")
+
         char = Character(race_obj, class_obj, stat, name)
         self.character_ids[ctx.author] = char
         if enemy:
@@ -100,9 +101,15 @@ class Campaign(commands.Cog):
         except Exception as e:
             await ctx.send(f'{e}')
             
+    @commands.command(name = 'list_enemies')
+    async def list_enemies(self,ctx: commands.Context):
+        await ctx.send(f"Here's a list of the current enemies.")
+        for idx, enemy in enumerate(self.enemies):
+            
+            await ctx.send(f'{idx+1} - {enemy.get_name()}' )
     @commands.command(name = 'attack')
-    async def attack(self,ctx: commands.Context):
-        await ctx.send(f'{self.character_ids[ctx.author].get_name()} has begun an attack!')
+    async def attack(self, ctx: commands.Context, enemy: int):
+        pass
 
 
 async def setup(client):
