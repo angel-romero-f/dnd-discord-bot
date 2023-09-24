@@ -5,7 +5,9 @@ import sys
 sys.path.append('DND/')
 sys.path.append('DND/Classes/')
 sys.path.append('DND/Races')
+sys.path.append('DND/Spell.py')
 
+from Spell import Spell
 from Races.Dwarf import Dwarf
 from Races.Human import Human
 from Races.Goblin import Goblin
@@ -17,7 +19,7 @@ from Classes.Rogue import Rogue
 from Classes.Barbarian import Barbarian
 from Character import Character
 
-class Campaign(commands.Cog):
+class Campaign(Spell, commands.Cog):
     character_ids = dict()
     party = []
     enemies = []
@@ -52,15 +54,25 @@ class Campaign(commands.Cog):
             await ctx.send(f"Your current stats are...\nStrength: {self.character_ids[name].get_stats().get_strength()} \nDexterity: {self.character_ids[name].get_stats().get_dexterity()} \nConstitution: {self.character_ids[name].get_stats().get_constitution()} \nWisdom: {self.character_ids[name].get_stats().get_wisdom()} \nIntelligence: {self.character_ids[name].get_stats().get_intelligence()} \nCharisma: {self.character_ids[name].get_stats().get_charisma()} \nCurrent Level: {self.character_ids[name].get_stats().get_lvl()} \nHP: {self.character_ids[name].get_stats().get_hp()}")
         else:
             await ctx.send("You are not authorized to use this command.")
+
     @commands.command(name = 'spellbook')
-    async def spellbook(self, ctx):
+    async def spellbook(self, ctx : commands.Context):
         """
         Returns a list of spells and their descriptions. 
         """
-        ctx.send("Fire Bolt: You hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 fire damage. A flammable object hit by this spell ignites if it isn’t being worn or carried. This spell’s damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10). \nCure Wounds: A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs. At Higher Levels: When you cast this spell using a spell slot of 2nd level or higher, the Healing increases by 1d8 for each slot level above 1st.\nCreate Water: You either create or destroy water. Create Water. You create up to 10 gallons of clean water within range in an open container. Alternatively, the water falls as rain in a 30-foot cube within range, extinguishing exposed flames in the area. Destroy Water. You destroy up to 10 gallons of water in an open container within range. Alternatively, you destroy fog in a 30-foot cube within range. At Higher Levels: When you cast this spell using a spell slot of 2nd level or higher, you create or destroy 10 additional gallons of water, or the size of the cube increases by 5 feet, for each slot level above 1st.")
-    @commands.command(name = 'cast')
-    async def cast(self, ctx):    
+        await ctx.send(f"Fire Bolt: You hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 fire damage. A flammable object hit by this spell ignites if it isn’t being worn or carried. This spell’s damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10). \nCure Wounds: A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs. At Higher Levels: When you cast this spell using a spell slot of 2nd level or higher, the Healing increases by 1d8 for each slot level above 1st.\nCreate Water: You either create or destroy water. Create Water. You create up to 10 gallons of clean water within range in an open container. Alternatively, the water falls as rain in a 30-foot cube within range, extinguishing exposed flames in the area. Destroy Water. You destroy up to 10 gallons of water in an open container within range. Alternatively, you destroy fog in a 30-foot cube within range. At Higher Levels: When you cast this spell using a spell slot of 2nd level or higher, you create or destroy 10 additional gallons of water, or the size of the cube increases by 5 feet, for each slot level above 1st.")
 
+    @commands.command(name = 'cast')
+    async def cast(self, ctx: commands.Context, spell, target):  
+        valid_spells = ['create or destroy water', 'firebolt', 'cure wounds']  
+        vaild_target1 = self.party
+        vaild_target2 = self.enemy
+        if spell in valid_spells:
+            if target in vaild_target1 or target in vaild_target2:
+                Spell.cast(spell, target)
+                await ctx.send(f'Your spell: {spell} has been cast\nYour oppenent is looking a little hurt')
+        else:
+            await ctx.send(f'I don\'t think you can cast that')
 
     @commands.command(name = 'campaign_info')
     async def campaign_info(self, ctx: commands.Context):
@@ -105,7 +117,8 @@ class Campaign(commands.Cog):
         self.character_ids[ctx.author.name] = char
         if enemy:
             self.enemies.append(char)
-        self.party.append(char)
+        else:
+            self.party.append(char)
         print(self.character_ids)
 
     
@@ -187,7 +200,7 @@ class Campaign(commands.Cog):
         if type != "armed" and type != "unarmed":
             await ctx.send("attack must be 'armed' or 'unarmed' ")
             return
-        if not(enemy >= 0 and enemy < len(self.enemies)):
+        if not(enemy >= 0 and enemy < len(self.party)):
             await ctx.send("must choose a valid enemy to attack!")
             return
         await ctx.send(f"{self.enemies[sel].get_name()} is attempting an {type} attack against {self.party[enemy].get_name()}.")
@@ -204,34 +217,38 @@ class Campaign(commands.Cog):
         except Exception as e:
             await ctx.send(f'{e}')
 
-    @commands.command(name = "help")
+    @commands.command(name = "helper")
     async def help(self, ctx: commands.Context, funct):
         if funct.lower() == 'start_campaign':
-            await ctx.send('')
+            await ctx.send(f'This command requires no further inputs and starts a campaign')
         elif funct.lower() == 'level_up':
-            await ctx.send('')
+            await ctx.send(f'This function takes in the id of a player and levels up their character and increases their stats')
         elif funct.lower() == 'campaign_info':
-            await ctx.send('')
+            await ctx.send(f'This command requires no further inputs and gives the name of the campaign and the list of current party members')
         elif funct.lower() == 'new_char':
-            await ctx.send('')
+            await ctx.send('Once the DM has started a campaign, this function takes name, the name of the character, class_name, the class you want to be, race_name, the race you want to be, and whether or not you are an enemy, his is preset to be false')
         elif funct.lower() == 'char_name': 
-            await ctx.send('')
+            await ctx.send('This function requires no further input and returns the name or your current character in the campaign')
         elif funct.lower() == 'stats': 
-            await ctx.send('')
+            await ctx.send('This command requires no further input and returns player stats and current level. Of the form:\nStrength, Dexterity, Constitution, Intelligence, Wisdom, Charisma, Level: int')
         elif funct.lower() == 'player_info': 
-            await ctx.send('')
+            await ctx.send('This command requires no further input and returns player class, race, and health')
         elif funct.lower() == 'list_enemies': 
-            await ctx.send('')
+            await ctx.send(f'This command requires no further inputs and returns a list of all current ememies')
         elif funct.lower() == 'attack': 
-            await ctx.send('')
+            await ctx.send(f'This command takes in enemy: int an integer representing an enemy, type : str you want to say it is either an \'armed\' or \'unarmed\' strike')
         elif funct.lower() == 'list_party': 
-            await ctx.send('This command re')
+            await ctx.send(f'This command requires no further inputs and returns a list of all current party members')
+        elif funct.lower() == 'cast': 
+            await ctx.send(f'This command requires no further inputs and return')
         elif funct.lower() == 'enemy_attack': 
-            await ctx.send('This command takes in enemy: int an integer representing a paty member, the sel : int an integer representing the enemy you want to have attack, type: str you want to say it is either an \'armed\' or \'unarmed\' strike')
+            await ctx.send(f'This command takes in enemy: int an integer representing a party member, the sel : int an integer representing the enemy you want to have attack, type: str you want to say it is either an \'armed\' or \'unarmed\' strike')
         elif funct.lower() == 'spellbook': 
-            await ctx.send('')
+            await ctx.send(f'This command requires no further inputs and returns all spells and their descriptions')
         else:
-            await ctx.send("I don't know what to help you with")
-
+            await ctx.send(f"I don't know what to help you with")
+    @commands.command(name = "funct_list")
+    async def funct_list(self, ctx: commands.Context):
+        await ctx.send(f'start_campaign\nlevel_up\ncampaign_info\nnew_char\nchar_name\nstats\nplayer_info\nlist_enemies\nattack\nlist_party\ncast\nenemy_attack\nspellbook')
 async def setup(client):
     await client.add_cog(Campaign(client))
