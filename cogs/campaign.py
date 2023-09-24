@@ -79,7 +79,14 @@ class Campaign(commands.Cog):
     
     @commands.command(name = "player_info")
     async def player_info(self, ctx: commands.Context):
-        await ctx.send()
+        """
+        Returns player class, race, and health in the form:
+        Player name: str
+        Class: str
+        Race: str
+        Current_hp: str
+        """
+        await ctx.send(f"Player name: {ctx.author} \nClass: {self.character_ids[ctx.author].get_class()} \nRace: {self.character_ids[ctx.author].get_race()}")
 
 
 
