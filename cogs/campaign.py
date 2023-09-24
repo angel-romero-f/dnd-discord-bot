@@ -92,7 +92,7 @@ class Campaign(commands.Cog):
         Current_hp: str
         """
         try:
-            await ctx.send(f"Character name: {self.character_ids[ctx.author].get_name()} \nClass: {self.character_ids[ctx.author].get_class().get_name()} \nRace: {self.character_ids[ctx.author].get_race().get_name()}")
+            await ctx.send(f"Character name: {self.character_ids[ctx.author].get_name()} \nClass: {self.character_ids[ctx.author].get_class().get_name()} \nRace: {self.character_ids[ctx.author].get_race().get_name()} \nCurrent Hit Points: {self.character_ids[ctx.author].get_stats().get_hp()}")
         except Exception as e:
             await ctx.send(f'{e}')
             
