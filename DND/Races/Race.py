@@ -35,3 +35,5 @@ class Race:
         returns whether or not this race has dark_vision
         """
         return self.get_dark_vision
+    def get_name(self):
+        return self.race
