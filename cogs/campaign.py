@@ -100,9 +100,10 @@ class Campaign(commands.Cog):
         except Exception as e:
             await ctx.send(f'{e}')
             
-    @commands.comand(name = 'attack')
+    @commands.command(name = 'attack')
     async def attack(self,ctx: commands.Context):
-        await ctx.send()
+        await ctx.send(f'{self.character_ids[ctx.author].get_name()} has begun an attack!')
+
 
 async def setup(client):
     await client.add_cog(Campaign(client))
