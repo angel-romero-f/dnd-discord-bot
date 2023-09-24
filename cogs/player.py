@@ -4,6 +4,7 @@ import asyncio
 import sys
 sys.path.append('DND/')
 sys.path.append('DND/Classes/')
+sys.path.append('DND/Races')
 
 from Races.Dwarf import Dwarf
 from Races.Human import Human

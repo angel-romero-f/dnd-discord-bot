@@ -1,7 +1,8 @@
-from DND.Races.Race import Race
+from Race import Race
 
 
-class human(Race):
+
+class Human(Race):
     def __init__(self):
         # in inches
         super().__init__("Human")

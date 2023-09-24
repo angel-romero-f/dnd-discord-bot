@@ -1,4 +1,5 @@
 from Race import Race
+
 class Goblin(Race):
     def __init__(self):
         super().__init__("Dwarf")
