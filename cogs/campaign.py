@@ -17,7 +17,7 @@ from Classes.Rogue import Rogue
 from Classes.Barbarian import Barbarian
 from Character import Character
 
-class Player(commands.Cog):
+class Campaign(commands.Cog):
     character_ids = {}
 
     def __init__(self, client):
@@ -62,4 +62,4 @@ class Player(commands.Cog):
 
 
 async def setup(client):
-    await client.add_cog(Player(client))
+    await client.add_cog(Campaign(client))
