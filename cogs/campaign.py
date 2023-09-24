@@ -91,9 +91,10 @@ class Campaign(commands.Cog):
         Race: str
         Current_hp: str
         """
-        await ctx.send(f"Player name: {self.character_ids[ctx.author].get_name()} \nClass: {self.character_ids[ctx.author].get_class().get_name()} \nRace: {self.character_ids[ctx.author].get_race().get_name()} \nCurrent Hitpoints: {self.character_ids[ctx.author].get_stats().get_hp()}")
 
+        await ctx.send(self.character_ids[ctx.author].get_info())
 
+            
 
 async def setup(client):
     await client.add_cog(Campaign(client))
