@@ -59,11 +59,7 @@ class Player(commands.Cog):
     async def char_name(self, ctx: commands.Context):
         await ctx.send(self.character_ids[ctx.author])
 
-def get_character_id(self):
-    """
-    Returns character_id
-    """
-    return self.character_ids
+
 
 
 
