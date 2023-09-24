@@ -33,11 +33,9 @@ class Character():
         '''
         dmg = 0
         if attack == "armed":
-            dmg = random.randint(1,8) + self.stats.get_strength()
+            dmg = random.randint(1,8) + self.stats.get_strength() // 3 
         if attack == "unarmed":
-            dmg = 0 if self.stats.get_strength() == 0 else self.stats.get_strength()
-        else:
-            raise Exception("Attack must be 'armed' or 'unarmed'")
+            dmg = 0 if self.stats.get_strength() == 0 else self.stats.get_strength() // 3
         succesful = True if random.randint(1,20) > target.race.get_base_ac() else False
         if succesful:
             target.change_hp(-dmg)
