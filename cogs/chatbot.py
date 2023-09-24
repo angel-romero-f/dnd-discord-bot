@@ -11,16 +11,21 @@ class ChatBot(commands.Cog):
         self.client = client
 
     def generate_chat_response(prompt):
+        try:
     # Define the parameters for the chat completion
-        response = openai.Completion.create(
-            model="babbage-002",  # Specify the model you want to use
-            prompt=prompt,
-            max_tokens=100,  # Adjust this as needed to control response length
-            temperature=0.7,  # Adjust this for response randomness
-            stop=None ) # You can specify stop words to limit the response
-            #Extract and return the chat message from the response
-        chat_message = response.choices[0].text.strip()
-        return chat_message
+            response = openai.Completion.create(
+                model="babbage-002",  # Specify the model you want to use
+                prompt=prompt,
+                max_tokens=100,  # Adjust this as needed to control response length
+                temperature=0.7,  # Adjust this for response randomness
+                stop=None ) # You can specify stop words to limit the response
+                #Extract and return the chat message from the response
+            chat_message = response.choices[0].text.strip()
+            return chat_message
+        except Exception as e:
+        # Print the specific error message to help diagnose the issue
+            print(f"Error generating GPT-3 response: {e}")
+            return "An error occurred while generating the response."
 
     @commands.command(name = "talk")
     async def talk(self, ctx, message: str):
