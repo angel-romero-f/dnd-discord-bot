@@ -92,7 +92,7 @@ class Campaign(commands.Cog):
         Current_hp: str
         """
 
-        await ctx.send(self.character_ids[ctx.author].get_info())
+        await ctx.send(f"Player name: {self.character_ids[ctx.author].get_name()} \n Class: {self.character_ids[ctx.author].get_class().get_name()} \n Race: {self.character_ids[ctx.author].get_race().get_name()}")
 
             
 
