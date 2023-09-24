@@ -64,7 +64,55 @@ class Stats(Character, Class):
         Returns the charisma of the character.
         """
         return self.charisma
+    
+    def increase_strength(self, val):
+        """
+        Increases strength to input value. 
+        """
+        self.strength += val
 
+    def increase_constitution(self, val):
+        """
+        Increases constitution to input value. 
+        """
+        self.constitution += val
+    
+    def increase_dexterity(self, val):
+        """
+        Increases dexterity to input value. 
+        """
+        self.dexterity += val
+
+    def increase_wisdom(self, val):
+        """
+        Increases wisdom to input value. 
+        """
+        self.wisdom += val
+    
+    def increase_intelligence(self, val):
+        """
+        Increases charisma to intelligence value. 
+        """
+        self.intelligence += val
+
+    def increase_charisma(self, val):
+        """
+        Increases charisma to input value. 
+        """
+        self.charisma += val
+
+    def increase_level(self, val):
+        """
+        Increases level to input value. 
+        """
+        self.level += val
+
+    def increase_hp(self, val):
+        """
+        Increases hp to input value. 
+        """
+        self.hp += val
+        
     def roll(self, n, k):
         """
         Rolls k amount n-sided die. Can be used for health addition when leveling up. 
