@@ -9,3 +9,11 @@ class Bard(Class):
     def __init__(self):
         super().__init__(["Musical", "Armor"], "bard")
         self.speciality = 'Inspiration' 
+        self.max_slots = 2
+        self.curr_slots = 2
+    def get_curr_slots(self):
+        return self.curr_slots
+    def get_max_slots(self):
+        return self.max_slots
+    def set_curr_slots(self, amt):
+        self.curr_slots = amt
