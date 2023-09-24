@@ -63,17 +63,20 @@ class Campaign(Spell, commands.Cog):
         await ctx.send(f"Fire Bolt: You hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 fire damage. A flammable object hit by this spell ignites if it isn’t being worn or carried. This spell’s damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10). \nCure Wounds: A creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs. At Higher Levels: When you cast this spell using a spell slot of 2nd level or higher, the Healing increases by 1d8 for each slot level above 1st.\nCreate Water: You either create or destroy water. Create Water. You create up to 10 gallons of clean water within range in an open container. Alternatively, the water falls as rain in a 30-foot cube within range, extinguishing exposed flames in the area. Destroy Water. You destroy up to 10 gallons of water in an open container within range. Alternatively, you destroy fog in a 30-foot cube within range. At Higher Levels: When you cast this spell using a spell slot of 2nd level or higher, you create or destroy 10 additional gallons of water, or the size of the cube increases by 5 feet, for each slot level above 1st.")
 
     @commands.command(name = 'cast')
-    async def cast(self, ctx: commands.Context, spell, target):  
-        valid_spells = ['create or destroy water', 'firebolt', 'cure wounds']  
-        vaild_target1 = self.party
-        vaild_target2 = self.enemy
+    async def cast(self, ctx: commands.Context, spell: str, target: int):  
+        valid_spells = ['create or destroy water', 'fire bolt', 'cure wounds']  
         if spell in valid_spells:
-            if target in vaild_target1 or target in vaild_target2:
-                Spell.cast(spell, target)
+            if target >= 0 and target < len(self.enemies):
+                Spell.cast(spell, self.enemies[target])
                 await ctx.send(f'Your spell: {spell} has been cast\nYour oppenent is looking a little hurt')
         else:
             await ctx.send(f'I don\'t think you can cast that')
-
+        try:
+            if self.enemies[target].check_death():
+                await ctx.send(f"{self.character_ids[ctx.author.name].get_name()} has defeated {self.enemies[target].get_name()}")
+                self.enemies.pop(target)
+        except Exception as e:
+            await ctx.send(f'{e}')
     @commands.command(name = 'campaign_info')
     async def campaign_info(self, ctx: commands.Context):
         """
@@ -240,7 +243,7 @@ class Campaign(Spell, commands.Cog):
         elif funct.lower() == 'list_party': 
             await ctx.send(f'This command requires no further inputs and returns a list of all current party members')
         elif funct.lower() == 'cast': 
-            await ctx.send(f'This command requires no further inputs and return')
+            await ctx.send(f'This command takes spell, a valid spell name, and target, a valid ')
         elif funct.lower() == 'enemy_attack': 
             await ctx.send(f'This command takes in enemy: int an integer representing a party member, the sel : int an integer representing the enemy you want to have attack, type: str you want to say it is either an \'armed\' or \'unarmed\' strike')
         elif funct.lower() == 'spellbook': 

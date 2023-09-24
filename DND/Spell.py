@@ -34,6 +34,6 @@ class Spell(Stats):
 
         if spell.lower() == "cure wounds":
             amount = random.randint(1, 9)
-            target.hp_change(amount)
+            target.get_stats().hp_change(amount)
             pass
         
