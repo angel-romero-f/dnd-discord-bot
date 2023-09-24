@@ -1,7 +1,7 @@
 from Classes.Class import Class
 from Races.Race import Race
 from Stats import Stats
-
+import random 
 
 class Character():
     """
@@ -13,4 +13,18 @@ class Character():
         self.class_obj = class_obj
         self.stats = stats  
     
+    #attack
+    #dodge
+    #long_rest
+    #short_rest
+    def change_hp(self, amount):
+        self.stats.hp_change(amount)
+
+    def attack(self, attack: str, target):
+        dmg = 0
+        if attack == "armed":
+            dmg = random.randint(1,8) + 1
+
+
+
 
