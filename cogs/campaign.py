@@ -34,14 +34,14 @@ class Campaign(commands.Cog):
         """
         roles = ctx.author.roles
         if self.campaign:
-            if "DM" in ctx.author.roles:
                 await ctx.send("There is already a campaign in progress!")
                 return
-            else:
-                await ctx.send("You're not authorized to use this command bozo!!")
-        self.campaign_name = name
-        self.campaign = True
-        await ctx.send(f'The group is off on their adventure of {name}!')
+        if "DM" in roles:
+            self.campaign_name = name
+            self.campaign = True
+            await ctx.send(f'The group is off on their adventure of {name}!')
+        else:
+            await ctx.send("You're not authorized to use this command bozo!!")
 
     @commands.command(name = 'campaign_info')
     async def campaign_info(self, ctx: commands.Context):
