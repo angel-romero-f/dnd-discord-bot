@@ -93,6 +93,20 @@ class Campaign(commands.Cog):
     async def char_name(self, ctx: commands.Context):
         await ctx.send(self.character_ids[ctx.author].get_name())
     
+    @commands.command(name = "stats")
+    async def stats(self, ctx: commands.Context):
+        """
+        Returns player stats and current level. Of the form:
+        Strength: int
+        Dexterity: int
+        Constitution: int
+        Intelligence: int
+        Wisdom: int
+        Charisma: int
+        Level: int
+        """
+        await ctx.send(f"Strength: {self.character_ids[ctx.author].get_stats().get_strength()} \n Dexterity: {self.character_ids[ctx.author].get_stats().get_dexterity()} \n Constitution: {self.character_ids[ctx.author].get_stats().get_constitution()} \n Intelligence: {self.character_ids[ctx.author].get_stats().get_intelligence()} \n Wisdom: {self.character_ids[ctx.author].get_stats().get_wisdom()} \n Charisma: {self.character_ids[ctx.author].get_stats().get_charisma()} \n Current Level: {self.character_ids[ctx.author].get_stats().get_lvl()}")
+        
     @commands.command(name = "player_info")
     async def player_info(self, ctx: commands.Context):
         """
