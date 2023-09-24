@@ -35,8 +35,8 @@ class Campaign(commands.Cog):
         roles = ctx.author.roles
 
         if self.campaign:
-                await ctx.send("There is already a campaign in progress!")
-                return
+            await ctx.send("There is already a campaign in progress!")
+            return
         if "DM" in list(map(lambda role: role.name, roles)):
             self.campaign_name = name
             self.campaign = True
@@ -198,9 +198,33 @@ class Campaign(commands.Cog):
             await ctx.send(f'{e}')
 
     @commands.command(name = "help")
-    async def help(self, ctx: commands.Context):
-        
-        await ctx.send(self.character_ids[ctx.author.name].get_name())
+    async def help(self, ctx: commands.Context, funct):
+        if funct.lower() == 'start_campaign':
+            await ctx.send('')
+        elif funct.lower() == 'level_up':
+            await ctx.send('')
+        elif funct.lower() == 'campaign_info':
+            await ctx.send('')
+        elif funct.lower() == 'new_char':
+            await ctx.send('')
+        elif funct.lower() == 'char_name': 
+            await ctx.send('')
+        elif funct.lower() == 'stats': 
+            await ctx.send('')
+        elif funct.lower() == 'player_info': 
+            await ctx.send('')
+        elif funct.lower() == 'list_enemies': 
+            await ctx.send('')
+        elif funct.lower() == 'attack': 
+            await ctx.send('')
+        elif funct.lower() == 'list_party': 
+            await ctx.send('This command re')
+        elif funct.lower() == 'enemy_attack': 
+            await ctx.send('This command takes in enemy: int an integer representing a paty member, the sel : int an integer representing the enemy you want to have attack, type: str you want to say it is either an \'armed\' or \'unarmed\' strike')
+        elif funct.lower() == 'spellbook': 
+            await ctx.send('')
+        else:
+            await ctx.send("I don't know what to help you with")
 
 async def setup(client):
     await client.add_cog(Campaign(client))
