@@ -40,5 +40,9 @@ class Character():
         if self.class_obj.get_name == 'bard':
             self.class_obj.set_curr_slots(self.class_obj.get_max_slots())
         return "You took a long rest!"
+    def get_stats(self):
+        return self.stats
+
+        
 
 
