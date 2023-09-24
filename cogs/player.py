@@ -2,10 +2,13 @@ import discord
 from discord.ext import commands
 import asyncio
 import sys
-from Races import Human, Dwarf, Goblin
-
 sys.path.append('DND/')
 sys.path.append('DND/Classes/')
+
+from Races.Dwarf import Dwarf
+from Races.Human import Human
+from Races.Goblin import Goblin
+
 
 from Stats import Stats
 from Classes.Bard import Bard
