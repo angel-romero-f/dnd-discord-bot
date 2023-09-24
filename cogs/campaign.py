@@ -20,6 +20,7 @@ from Character import Character
 class Campaign(commands.Cog):
     character_ids = dict()
     party = []
+    enemies = []
     campaign_name = ''
     campaign = False
 
@@ -46,7 +47,7 @@ class Campaign(commands.Cog):
         await ctx.send(f'Campaign name: {self.campaign_name}\nParty members: {self.party}')
 
     @commands.command(name = 'new_char')
-    async def new_char(self, ctx: commands.Context, name: str, class_name: str, race_name: str):
+    async def new_char(self, ctx: commands.Context, name: str, class_name: str, race_name: str, enemy = False):
         await ctx.send(f'hello {name}!' )
         class_obj = None
         race_obj = None
@@ -72,8 +73,11 @@ class Campaign(commands.Cog):
             await ctx.send(stat.statroll(class_obj))
         except Exception as e:
             await ctx.send(f'{e}')
+        
         char = Character(race_obj, class_obj, stat, name)
         self.character_ids[ctx.author] = char
+        if enemy:
+            self.enemies.append(char)
         self.party.append(name)
 
     
@@ -96,6 +100,9 @@ class Campaign(commands.Cog):
         except Exception as e:
             await ctx.send(f'{e}')
             
+    @commands.comand(name = 'attack')
+    async def attack(self,ctx: commands.Context):
+        await ctx.send()
 
 async def setup(client):
     await client.add_cog(Campaign(client))

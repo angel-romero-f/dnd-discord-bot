@@ -26,7 +26,6 @@ class Character():
         Changes the value of hp for a character by a set amount
         '''
         self.stats.hp_change(amount)
-
     def attack(self, attack: str, target):
         '''
         Represents a character attack, uses attacks that a character can do to modify the health of another
@@ -39,7 +38,7 @@ class Character():
             dmg = 0 if self.stats.get_strength() == 0 else self.stats.get_strength()
         else:
             raise Exception("Attack must be 'armed' or 'unarmed'")
-        succesful = True if random.randint(1,20) > self.race.get_base_ac() else False
+        succesful = True if random.randint(1,20) > target.race.get_base_ac() else False
         if succesful:
             target.change_hp(-dmg)
             return "Your hit was a success and it did {dmg} damage!"
@@ -70,6 +69,8 @@ class Character():
         return self.race
     def get_name(self):
         return self.name
-        
+    def check_death(self):
+        return self.stats.get_hp <= 0
+    
 
 
