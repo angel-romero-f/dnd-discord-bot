@@ -23,6 +23,12 @@ class Stats(Character, Class):
         self.char_lvl = char_lvl
         self.current_hp = hit_points
     
+    def get_total_hp(self):
+        """
+        Returns the total hp of the character.
+        """
+        return self.hit_points
+    
     def get_hp(self):
         """
         Returns the current healthpoints of the character.
@@ -107,11 +113,11 @@ class Stats(Character, Class):
         """
         self.level += val
 
-    def increase_hp(self, val):
+    def set_hp(self, val):
         """
-        Increases hp to input value. 
+        Set hp to input value. 
         """
-        self.hp += val
+        self.hp = val
         
     def roll(self, n, k):
         """
