@@ -13,9 +13,14 @@ async def on_ready():
 	print('------')
 
 async def main():
+
+	await bot.load_extension('cogs.dm')
+
+
 	await bot.load_extension('cogs.misc')
 	await bot.load_extension('cogs.player')
 	await bot.load_extension('cogs.chatbot')
+
 	await bot.start('MTE1NDk5NjUyNzA3MzM0NTU4Nw.Ga9JEb.2v5fCD73nONnyg7SPXfZ9ImxkE2Yv2rRggGxGI')
 	
 
