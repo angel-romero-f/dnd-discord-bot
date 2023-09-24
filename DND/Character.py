@@ -21,11 +21,7 @@ class Character():
     #dodge
     #long_rest
     #short_rest
-    def change_hp(self, amount):
-        '''
-        Changes the value of hp for a character by a set amount
-        '''
-        self.stats.hp_change(amount)
+
     def attackc(self, attack: str, target):
         '''
         Represents a character attack, uses attacks that a character can do to modify the health of another
@@ -38,7 +34,7 @@ class Character():
             dmg = 0 if self.stats.get_strength() == 0 else self.stats.get_strength() // 3
         succesful = True if random.randint(1,20) > target.race.get_base_ac() else False
         if succesful:
-            target.change_hp(-dmg)
+            target.get_stats().hp_change(-dmg)
             return "Your hit was a success and it did {dmg} damage!"
         else:
             return "Lol you missed"

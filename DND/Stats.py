@@ -162,7 +162,7 @@ class Stats(Class):
         """
         How the hp of the characters evolves throughout the game. Independent of the total hitpoints. 
         """
-        current_hp = current_hp + amount
+        self.current_hp = self.current_hp + amount
 
 
     def statroll(self, class_obj):
