@@ -15,6 +15,7 @@ from Stats import Stats
 from Classes.Bard import Bard
 from Classes.Rogue import Rogue
 from Classes.Barbarian import Barbarian
+from Character import Character
 
 class Player(commands.Cog):
     character_ids = {}
@@ -24,7 +25,6 @@ class Player(commands.Cog):
 
     @commands.command(name = 'new_char')
     async def new_char(self, ctx: commands.Context, name: str, class_name: str, race_name: str):
-        self.character_ids[ctx.author] = name
         await ctx.send(f'hello {name}!' )
         class_obj = None
         race_obj = None
@@ -50,7 +50,8 @@ class Player(commands.Cog):
             await ctx.send(stat.statroll(class_obj))
         except Exception as e:
             await ctx.send(f'{e}')
-            
+        self.character_ids[ctx.author] = Character(race_obj, class_obj, stat)
+        
 
     
 
