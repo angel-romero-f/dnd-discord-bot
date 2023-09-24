@@ -44,6 +44,15 @@ class Campaign(commands.Cog):
         else:
             await ctx.send("You're not authorized to use this command bozo!!")
 
+    @commands.command(name = 'level_up')
+    async def level_up(self, ctx: commands.Context, name: str):
+        roles = ctx.author.roles
+        if "DM" in list(map(lambda role: role.name, roles)):
+            await ctx.send(self.character_ids[name].get_stats().level_up())
+            await ctx.send(Campaign.stats())
+        else:
+            await ctx.send("You are not authorized to use this command.")
+
     @commands.command(name = 'campaign_info')
     async def campaign_info(self, ctx: commands.Context):
         """
@@ -107,7 +116,7 @@ class Campaign(commands.Cog):
         Charisma: int
         Level: int
         """
-        await ctx.send(f"Strength: {self.character_ids[ctx.author].get_stats().get_strength()}\n Dexterity: {self.character_ids[ctx.author].get_stats().get_dexterity()}\n Constitution: {self.character_ids[ctx.author].get_stats().get_constitution()}\n Wisdom: {self.character_ids[ctx.author].get_stats().get_wisdom()}\n Intelligence: {self.character_ids[ctx.author].get_stats().get_intelligence()}\n Charisma: {self.character_ids[ctx.author].get_stats().get_charisma()}\n Current Level: {self.character_ids[ctx.author].get_stats().get_lvl()}")
+        await ctx.send(f"Your current stats are...\nStrength: {self.character_ids[ctx.author].get_stats().get_strength()} \n Dexterity: {self.character_ids[ctx.author].get_stats().get_dexterity()} \n Constitution: {self.character_ids[ctx.author].get_stats().get_constitution()} \n Wisdom: {self.character_ids[ctx.author].get_stats().get_wisdom()} \n Intelligence: {self.character_ids[ctx.author].get_stats().get_intelligence()} \n Charisma: {self.character_ids[ctx.author].get_stats().get_charisma()} \n Current Level: {self.character_ids[ctx.author].get_stats().get_lvl()}")
 
     @commands.command(name = "player_info")
     async def player_info(self, ctx: commands.Context):
