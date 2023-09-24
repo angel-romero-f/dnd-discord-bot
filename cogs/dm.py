@@ -22,7 +22,11 @@ class DM(Player, commands.Cog):
         """
         Levels up a character and returns the new stats
         """
-        character = self.character_ids[user]
+        try:   
+            character = self.character_ids[user]
+        except Exception as e:
+            await ctx.send(e)
+        
         print(character)
         character.get_stats().level_up()
         await ctx.send(character.get_info())
