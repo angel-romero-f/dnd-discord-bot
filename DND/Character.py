@@ -37,12 +37,16 @@ class Character():
 
     def long_rest(self):
         self.stats.set_hp(self.stats.get_total_hp())
-        if self.class_obj.get_name == 'bard':
+        if self.class_obj.get_name() == 'bard':
             self.class_obj.set_curr_slots(self.class_obj.get_max_slots())
         return "You took a long rest!"
     def get_stats(self):
         return self.stats
+    def get_info(self):
 
+        line1 = self.class_obj.display_class_info()
+        line2 = "Strength: {stats[0]}\nDexterity: {stats[1]}\nConstitution: {stats[2]}\nWisdom: {stats[3]}\nIntelligence: {stats[4]}\nCharisma: {stats[5]}\nHP: {stats[-1]}"
+        return f'{line1}\n+{line2}'
         
 
 
