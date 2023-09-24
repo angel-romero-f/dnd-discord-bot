@@ -23,8 +23,17 @@ class Character():
     def attack(self, attack: str, target):
         dmg = 0
         if attack == "armed":
-            dmg = random.randint(1,8) + 1
+            dmg = random.randint(1,8) + self.stats.get_strength()
+        if attack == "unarmed":
+            dmg = 0 if self.stats.get_strength() == 0 else self.stats.get_strength()
+        else:
+            raise Exception("Attack must be 'armed' or 'unarmed'")
+        succesful = True if random.randint(1,20) > self.race.get_base_ac() else False
+        if succesful:
+            target.change_hp(-dmg)
+            return "Your hit was a success and it did {dmg} damage!"
+        else:
+            return "Lol you missed"
 
-
-
-
+    def long_rest(self):
+        self.stats.set_hp(self.stats.get_total_hp())
