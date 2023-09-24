@@ -1,12 +1,9 @@
-from Character import Character
 from Classes.Class import Class
-import Classes.Class
-import random 
-import discord 
-from discord.ext import commands
-import asyncio
 
-class Stats(Character, Class):
+import random 
+
+
+class Stats(Class):
     """
     Should initalize with the information of level, race, and class that way it knows what to make each stat and how to modify it
     Making use of methods like roll may be useful to create methods in here, should probably br able to display
@@ -141,14 +138,17 @@ class Stats(Character, Class):
         """
         self.char_lvl += 1
         if (class_obj.get_name() == "rogue"):
-            self.hit_points += Stats.roll(8, 1) + self.const_mod
-            self.current_hp += Stats.roll(8, 1) + self.const_mod
+            added_health = Stats.roll(8, 1) + self.const_mod
+            self.hit_points += added_health
+            self.current_hp += added_health
         elif (class_obj.get_name() == "barbarian"):
-            self.hit_points += Stats.roll(12, 1) + self.const_mod
-            self.current_hp += Stats.roll(12, 1) + self.const_mod
+            added_health = Stats.roll(12, 1) + self.const_mod
+            self.hit_points += added_health
+            self.current_hp += added_health
         elif (class_obj.get_name() == "bard"):
-            self.hit_points += Stats.roll(8, 1) + self.const_mod
-            self.current_hp += Stats.roll(8, 1) + self.const_mod
+            added_health = Stats.roll(8, 1) + self.const_mod
+            self.hit_points += added_health
+            self.current_hp += added_health
         print(f"{self.class_name} leveled up to level {self.char_lvl}!")
     
     def get_lvl(self):
