@@ -3,7 +3,6 @@ import discord
 from discord.ext import commands
 import asyncio
 import os
-from dotenv import load_dotenv
 
 openai.api_key = "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"
 
