@@ -14,7 +14,7 @@ async def on_ready():
 
 async def main():
 
-	await bot.load_extension('cogs.dm')
+
 
 
 	await bot.load_extension('cogs.misc')

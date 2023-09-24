@@ -19,9 +19,26 @@ from Character import Character
 
 class Campaign(commands.Cog):
     character_ids = {}
+    party = []
+    campaign_name = ''
 
     def __init__(self, client):
         self.client = client
+
+    @commands.command(name = 'start_campaign')
+    async def start_campaign(self, ctx: commands.Context, name: str):
+        """
+        Starts a new campaign
+        """
+        self.campaign_name = name
+        await ctx.send(f'The group is off on their adventure of {name}')
+
+    @commands.command(name = 'campaign_info')
+    async def campaign_info(self, ctx: commands.Context):
+        """
+        Starts a new campaign
+        """
+        await ctx.send(f'Campaign name: {self.campaign_name}\nParty members: {self.party}')
 
     @commands.command(name = 'new_char')
     async def new_char(self, ctx: commands.Context, name: str, class_name: str, race_name: str):
@@ -50,8 +67,9 @@ class Campaign(commands.Cog):
             await ctx.send(stat.statroll(class_obj))
         except Exception as e:
             await ctx.send(f'{e}')
-        self.character_ids[ctx.author] = Character(race_obj, class_obj, stat)
-        
+        char = Character(race_obj, class_obj, stat)
+        self.character_ids[ctx.author] = char
+        self.party.append(char)
 
     
 
