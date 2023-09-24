@@ -47,15 +47,13 @@ class Campaign(commands.Cog):
     @commands.command(name = 'level_up')
     async def level_up(self, ctx: commands.Context, name: str):
         roles = ctx.author.roles
-        if "DM" in list(map(lambda role: role.name, roles)):
-            await ctx.send(self.character_ids[name].get_stats().level_up())
-        try:
-            await ctx.send(Campaign.stats())
-        except Exception as e:           
-            print(f"Error during level up: {e}")
-
+        if "DM" in list(map(lambda role: role.name, roles)):  
+            await ctx.send(self.character_ids[name].get_stats().level_up(self.character_ids[name].get_class()))
+            await ctx.send(f"Your current stats are...\nStrength: {self.character_ids[name].get_stats().get_strength()} \nDexterity: {self.character_ids[name].get_stats().get_dexterity()} \nConstitution: {self.character_ids[name].get_stats().get_constitution()} \nWisdom: {self.character_ids[name].get_stats().get_wisdom()} \nIntelligence: {self.character_ids[name].get_stats().get_intelligence()} \nCharisma: {self.character_ids[name].get_stats().get_charisma()} \nCurrent Level: {self.character_ids[name].get_stats().get_lvl()} \nHP: {self.character_ids[name].get_stats().get_hp()}")
         else:
             await ctx.send("You are not authorized to use this command.")
+        
+
 
     @commands.command(name = 'campaign_info')
     async def campaign_info(self, ctx: commands.Context):
@@ -121,7 +119,7 @@ class Campaign(commands.Cog):
         Charisma: int
         Level: int
         """
-        await ctx.send(f"Your current stats are...\nStrength: {self.character_ids[ctx.author.name].get_stats().get_strength()} \n Dexterity: {self.character_ids[ctx.author.name].get_stats().get_dexterity()} \n Constitution: {self.character_ids[ctx.author.name].get_stats().get_constitution()} \n Wisdom: {self.character_ids[ctx.author.name].get_stats().get_wisdom()} \n Intelligence: {self.character_ids[ctx.author.name].get_stats().get_intelligence()} \n Charisma: {self.character_ids[ctx.author.name].get_stats().get_charisma()} \n Current Level: {self.character_ids[ctx.author.name].get_stats().get_lvl()}")
+        await ctx.send(f"Your current stats are...\nStrength: {self.character_ids[ctx.author.name].get_stats().get_strength()} \n Dexterity: {self.character_ids[ctx.author.name].get_stats().get_dexterity()} \n Constitution: {self.character_ids[ctx.author.name].get_stats().get_constitution()} \n Wisdom: {self.character_ids[ctx.author.name].get_stats().get_wisdom()} \n Intelligence: {self.character_ids[ctx.author.name].get_stats().get_intelligence()} \n Charisma: {self.character_ids[ctx.author.name].get_stats().get_charisma()} \n Current Level: {self.character_ids[ctx.author.name].get_stats().get_lvl()} \n Health Points: {self.character_ids[ctx.author.name].get_stats().get_hp()}")
 
     @commands.command(name = "player_info")
     async def player_info(self, ctx: commands.Context):
@@ -136,13 +134,14 @@ class Campaign(commands.Cog):
             await ctx.send(f"Character name: {self.character_ids[ctx.author.name].get_name()}\nClass: {self.character_ids[ctx.author.name].get_class().get_name()}\nRace: {self.character_ids[ctx.author.name].get_race().get_name()}\nCurrent Hit Points: {self.character_ids[ctx.author.name].get_stats().get_hp()}")
         except Exception as e:
             await ctx.send(f'{e}')
-            
+
     @commands.command(name = 'list_enemies')
     async def list_enemies(self,ctx: commands.Context):
         await ctx.send(f"Here's a list of the current enemies.")
         for idx, enemy in enumerate(self.enemies):
             
             await ctx.send(f'{idx} - {enemy.get_name()}' )
+
     @commands.command(name = 'attack')
     async def attack(self, ctx: commands.Context, enemy: int, type : str):
         if type != "armed" and type != "unarmed":
@@ -164,12 +163,14 @@ class Campaign(commands.Cog):
                 self.enemies.pop(enemy)
         except Exception as e:
             await ctx.send(f'{e}')
+
     @commands.command(name = 'list_party')
     async def list_party(self,ctx: commands.Context):
         await ctx.send(f"Here's a list of the current party.")
         for idx, enemy in enumerate(self.party):
             
             await ctx.send(f'{idx} - {enemy.get_name()}' )
+
     @commands.command(name = 'enemy_attack')
     async def enemy_attack(self, ctx: commands.Context, enemy: int, sel : int, type: str):
         if not "DM" in list(map(lambda role: role.name, ctx.author.roles)):
@@ -195,6 +196,11 @@ class Campaign(commands.Cog):
                 self.party.pop(enemy)
         except Exception as e:
             await ctx.send(f'{e}')
+
+    @commands.command(name = "help")
+    async def help(self, ctx: commands.Context):
+        
+        await ctx.send(self.character_ids[ctx.author.name].get_name())
 
 async def setup(client):
     await client.add_cog(Campaign(client))

@@ -140,18 +140,18 @@ class Stats(Class):
         try:
             self.char_lvl += 1
             if (class_obj.get_name() == "rogue"):
-                added_health = Stats.roll(8, 1) + self.const_mod
+                added_health = self.roll(8, 1) + self.const_mod
                 self.hit_points += added_health
                 self.current_hp += added_health
             elif (class_obj.get_name() == "barbarian"):
-                added_health = Stats.roll(12, 1) + self.const_mod
+                added_health = self.roll(12, 1) + self.const_mod
                 self.hit_points += added_health
                 self.current_hp += added_health
             elif (class_obj.get_name() == "bard"):
-                added_health = Stats.roll(8, 1) + self.const_mod
+                added_health = self.roll(8, 1) + self.const_mod
                 self.hit_points += added_health
                 self.current_hp += added_health
-            print(f"{self.class_name} leveled up to level {self.char_lvl}!")
+            return "You have leveled up!"
         except Exception as e:
             print(f"Error during level up: {e}")
             raise e  # Re-raise the exception to see it in the console
