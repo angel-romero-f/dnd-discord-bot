@@ -8,10 +8,11 @@ class Character():
     This is the root class from which Race, Stats, and Class classes should stem
     I added some basic inputs but could easily add more
     """
-    def __init__(self, race: Race, class_obj: Class, stats: Stats):
+    def __init__(self, race: Race, class_obj: Class, stats: Stats, name: str):
         self.race = race
         self.class_obj = class_obj
         self.stats = stats  
+        self.name = name
     
     #attack
     #dodge
@@ -52,4 +53,9 @@ class Character():
         return self.class_obj
     def get_race(self):
         return self.race
-    
+    def get_name(self) -> str:
+        """
+        returns the name of this character
+        """
+        return self.name
+

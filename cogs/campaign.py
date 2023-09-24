@@ -72,7 +72,7 @@ class Campaign(commands.Cog):
             await ctx.send(stat.statroll(class_obj))
         except Exception as e:
             await ctx.send(f'{e}')
-        char = Character(race_obj, class_obj, stat)
+        char = Character(race_obj, class_obj, stat, name)
         self.character_ids[ctx.author] = char
         self.party.append(name)
 
