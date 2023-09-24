@@ -2,6 +2,8 @@ import openai
 import discord
 from discord.ext import commands
 import asyncio
+import os
+from dotenv import load_dotenv
 
 openai.api_key = "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"
 
@@ -9,17 +11,18 @@ openai.api_key = "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"
 class ChatBot(commands.Cog):
     def __init__(self, client):
         self.client = client
-    def generate_gpt3_response(self, prompt):
+    def generate_chat_response(prompt):
+        # Define the parameters for the chat completion
         response = openai.Completion.create(
-            model="text-davinci-003",
+            model="babbage-002",  # Specify the model you want to use
             prompt=prompt,
-            temperature=1,
-            max_tokens = 100
+            max_tokens=100,  # Adjust this as needed to control response length
+            temperature=0.7,  # Adjust this for response randomness
+            stop=None  # You can specify stop words to limit the response
         )
-        response_dict = response.get('choice')
-        if response_dict:
-            prompt_resp = response_dict[0]['text']
-        return prompt_resp
+        # Extract and return the chat message from the response
+        chat_message = response.choices[0].text.strip()
+        return chat_message
 
     @commands.command(name = "talk")
     async def talk(self, ctx, message: str):
