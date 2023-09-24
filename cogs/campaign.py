@@ -49,7 +49,11 @@ class Campaign(commands.Cog):
         roles = ctx.author.roles
         if "DM" in list(map(lambda role: role.name, roles)):
             await ctx.send(self.character_ids[name].get_stats().level_up())
+        try:
             await ctx.send(Campaign.stats())
+        except Exception as e:           
+            print(f"Error during level up: {e}")
+
         else:
             await ctx.send("You are not authorized to use this command.")
 
