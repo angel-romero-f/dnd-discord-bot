@@ -105,8 +105,8 @@ class Campaign(commands.Cog):
         Charisma: int
         Level: int
         """
-        await ctx.send(f"Strength: {self.character_ids[ctx.author].get_stats().get_strength()} \n Dexterity: {self.character_ids[ctx.author].get_stats().get_dexterity()} \n Constitution: {self.character_ids[ctx.author].get_stats().get_constitution()} \n Intelligence: {self.character_ids[ctx.author].get_stats().get_intelligence()} \n Wisdom: {self.character_ids[ctx.author].get_stats().get_wisdom()} \n Charisma: {self.character_ids[ctx.author].get_stats().get_charisma()} \n Current Level: {self.character_ids[ctx.author].get_stats().get_lvl()}")
-        
+        await ctx.send(f"Strength: {self.character_ids[ctx.author].get_stats().get_strength()} \n Dexterity: {self.character_ids[ctx.author].get_stats().get_dexterity()} \n Constitution: {self.character_ids[ctx.author].get_stats().get_constitution()} \n Wisdom: {self.character_ids[ctx.author].get_stats().get_wisdom()} \n Intelligence: {self.character_ids[ctx.author].get_stats().get_intelligence()} \n Charisma: {self.character_ids[ctx.author].get_stats().get_charisma()} \n Current Level: {self.character_ids[ctx.author].get_stats().get_lvl()}")
+
     @commands.command(name = "player_info")
     async def player_info(self, ctx: commands.Context):
         """
