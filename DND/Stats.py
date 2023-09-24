@@ -114,7 +114,7 @@ class Stats(Class):
         """
         Set hp to input value. 
         """
-        self.hp = val
+        self.hit_points = val
         
     def roll(self, n, k):
         """
@@ -213,6 +213,6 @@ class Stats(Class):
             stats[-1] = 12 + self.const_mod
         elif (class_obj.get_name() == "bard"):
             stats[-1] = 8 + self.const_mod
-        self.current_hp = self.hit_points
+        self.current_hp = stats[-1]
         return f"Strength: {stats[0]}\nDexterity: {stats[1]}\nConstitution: {stats[2]}\nWisdom: {stats[3]}\nIntelligence: {stats[4]}\nCharisma: {stats[5]}\nHP: {stats[-1]}"
 
