@@ -4,7 +4,7 @@ import asyncio
 
 class Encounters(commands.Cog):
     def __init__(self, client):
-        self.client
+        self.client = client
     
     @commands.command(name='npc',
                       brief='gives players a prompt from an npc')
