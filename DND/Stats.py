@@ -8,6 +8,7 @@ class Stats(Class):
     Should initalize with the information of level, race, and class that way it knows what to make each stat and how to modify it
     Making use of methods like roll may be useful to create methods in here, should probably br able to display
     """
+    current_hp = 0
     const_mod = 0
     def __init__(self, hit_points=4, strength=0, constitution=0, dexterity=0, wisdom=0, intelligence=0, charisma=0, char_lvl=1):
         self.hit_points = hit_points

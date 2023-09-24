@@ -79,6 +79,7 @@ class Campaign(commands.Cog):
             await ctx.send(stat.statroll(class_obj))
         else:
             await ctx.send("Succesfully created an enemy.")
+            stat.statroll(class_obj)
 
         char = Character(race_obj, class_obj, stat, name)
         self.character_ids[ctx.author] = char
@@ -114,15 +115,20 @@ class Campaign(commands.Cog):
             await ctx.send(f'{idx+1} - {enemy.get_name()}' )
     @commands.command(name = 'attack')
     async def attack(self, ctx: commands.Context, enemy: int, type : str):
-        if type != "armed" or type != "unarmed":
+        if type != "armed" and type != "unarmed":
             await ctx.send("attack must be 'armed' or 'unarmed' ")
             return
         if not(enemy >= 0 and enemy < len(self.enemies)):
             await ctx.send("must choose a valid enemy to attack!")
             return
         await ctx.send(f"{self.character_ids[ctx.author].get_name()} is attempting an {type} attack against {self.enemies[enemy].get_name()}.")
-        msg = self.character_ids[ctx.author].attack(type, self.enemies[enemy])
-        await ctx.send(msg)
+
+        try:
+            msg = self.character_ids[ctx.author].attack(type, self.enemies[enemy])
+            await ctx.send(msg)
+        except Exception as e:
+            await ctx.send(f'{e}')
+
         if self.enemies[enemy].check_death():
             await ctx.send(f"{self.character_ids[ctx.author].get_name()} has defeated {self.enemies[enemy].get_name()}")
             self.enemies.remove(enemy)
